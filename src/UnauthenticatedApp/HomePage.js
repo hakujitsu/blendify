@@ -1,11 +1,18 @@
 import { Button, Link } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../hooks/auth/useAuth";
+import LoadingScreen from "./LoadingScreen";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || "";
 
 const HomePage = () => {
+  const [loading, setLoading] = useState(true)
   const { authenticateWithToken } = useAuth();
+
+  const authenticate = async () => {
+    await authenticateWithToken();
+    setLoading(false)
+  }
 
   const generateQueryString = () => {
     const redirect_uri = "http://localhost:3000/callback";
@@ -22,13 +29,16 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    authenticateWithToken()
+    authenticate()
   }, [])
 
   return (
-    <Link href={"https://accounts.spotify.com/authorize?" + generateQueryString()} >
-      Log into Spotify
-    </Link>
+    <>
+      {loading ? <LoadingScreen /> :
+        <Link href={"https://accounts.spotify.com/authorize?" + generateQueryString()} >
+          Log into Spotify
+        </Link>}
+    </>
   );
 };
 

@@ -1,8 +1,8 @@
-import { CircularProgress } from "@mui/material";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/auth/useAuth";
 import { useAuthContext } from "../hooks/auth/useAuthContext";
+import LoadingScreen from "./LoadingScreen";
 
 const Callback = () => {
   const effectCalled = useRef(false);
@@ -36,7 +36,7 @@ const Callback = () => {
 
   // TODO: fix display
 
-  return <CircularProgress />;
+  return <LoadingScreen />;
 };
 
 export default Callback;
