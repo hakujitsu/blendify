@@ -11,7 +11,7 @@ import {
   AuthContext,
   useAuthContext,
   useAuthContextProvider,
-} from "./hooks/useAuthContext";
+} from "./hooks/auth/useAuthContext";
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from "@mui/material";
 import darkTheme from "./styles/theme"

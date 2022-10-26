@@ -1,30 +1,18 @@
 import { CircularProgress } from "@mui/material";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../hooks/useAuthContext";
+import useAuth from "../hooks/auth/useAuth";
+import { useAuthContext } from "../hooks/auth/useAuthContext";
 
 const Callback = () => {
   const effectCalled = useRef(false);
-  const { userDetails, setUserDetails } = useAuthContext();
+  const { userDetails } = useAuthContext();
+  const {authenticateWithCode} = useAuth();
   const navigate = useNavigate();
 
   const authenticate = async (code) => {
     effectCalled.current = true;
-    const res = await fetch(`/api/callback/?code=${code}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    const { access_token, refresh_token, display_name, image, uri } = data;
-    setUserDetails({
-      username: display_name,
-      img: image,
-      uri: uri,
-      accessToken: access_token,
-      refreshToken: refresh_token,
-    });
+    await authenticateWithCode(code)
   };
 
   useEffect(() => {
@@ -35,6 +23,7 @@ const Callback = () => {
     // TODO: add error handling
 
     if (!effectCalled.current && code) {
+
       authenticate(code);
     }
   }, []);

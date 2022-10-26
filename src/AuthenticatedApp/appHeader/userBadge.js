@@ -3,7 +3,7 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useState } from "react";
 import UserMenu from "./userMenu";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/auth/useAuthContext";
 
 const sx = {
   badge: {
@@ -31,12 +31,12 @@ const sx = {
 
 const UserBadge = () => {
   const { userDetails } = useAuthContext();
-
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -51,7 +51,7 @@ const UserBadge = () => {
           spacing={1.5}
           sx={sx.stack}
         >
-          <img src={userDetails?.img} style={sx.image}></img>
+          <img src={userDetails?.img} alt="profile image" style={sx.image}></img>
           <Typography variant="body2">{userDetails?.username}</Typography>
           <Box sx={sx.icon}>
             {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}

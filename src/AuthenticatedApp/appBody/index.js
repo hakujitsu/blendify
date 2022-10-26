@@ -11,7 +11,6 @@ const sx = {
 const AppBody = () => {
   return (
     <Box sx={sx.body}>
-      nmn
       {/* <Playlists/> */}
     </Box>
   )

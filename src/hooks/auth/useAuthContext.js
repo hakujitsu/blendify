@@ -5,8 +5,6 @@ export const AuthContext = createContext(null);
 export const useAuthContextProvider = () => {
   const [userDetails, setUserDetails] = useState(null);
 
-  console.log(userDetails)
-
   const isLoggedIn = () => {
     return userDetails !== null;
   };

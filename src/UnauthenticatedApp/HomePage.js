@@ -1,8 +1,12 @@
 import { Button, Link } from "@mui/material";
+import { useEffect } from "react";
+import useAuth from "../hooks/auth/useAuth";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || "";
 
 const HomePage = () => {
+  const { authenticateWithToken } = useAuth();
+
   const generateQueryString = () => {
     const redirect_uri = "http://localhost:3000/callback";
 
@@ -16,6 +20,10 @@ const HomePage = () => {
     });
     return params;
   };
+
+  useEffect(() => {
+    authenticateWithToken()
+  }, [])
 
   return (
     <Link href={"https://accounts.spotify.com/authorize?" + generateQueryString()} >

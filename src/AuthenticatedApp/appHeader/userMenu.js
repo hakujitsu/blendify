@@ -1,5 +1,6 @@
 import { useTheme } from "@emotion/react";
 import { Menu, MenuItem } from "@mui/material";
+import useAuth from "../../hooks/auth/useAuth";
 
 const sx = {
   menu: {
@@ -13,10 +14,7 @@ const sx = {
 const UserMenu = (props) => {
   const { anchorEl, open, handleClose } = props;
   const theme = useTheme();
-
-  const signOut = () => {
-    // TODO: implement
-  };
+  const { logOut } = useAuth();
 
   return (
     <Menu
@@ -44,7 +42,7 @@ const UserMenu = (props) => {
       disableAutoFocusItem
       sx={sx.menu}
     >
-      <MenuItem dense onClick={signOut}>
+      <MenuItem dense onClick={logOut}>
         Logout
       </MenuItem>
     </Menu>

@@ -1,5 +1,5 @@
-import getAccessToken from "../lib/auth/getAccessToken";
-import getProfile from "../lib/auth/getProfile";
+import getAccessToken from "../../lib/auth/getAccessToken";
+import getProfile from "../../lib/auth/getProfile";
 
 export default async function handler(req, res) {
   const code = req.query.code || null;
