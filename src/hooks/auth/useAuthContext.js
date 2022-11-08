@@ -9,7 +9,15 @@ export const useAuthContextProvider = () => {
     return userDetails !== null;
   };
 
-  return { userDetails, setUserDetails, isLoggedIn };
+  const getAccessToken = () => {
+    if (isLoggedIn()) {
+      return userDetails.accessToken
+    }
+
+    return null
+  }
+
+  return { userDetails, setUserDetails, isLoggedIn, getAccessToken };
 };
 
 export const useAuthContext = () => {

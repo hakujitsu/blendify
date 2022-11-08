@@ -1,4 +1,5 @@
 import { Box, Stack } from "@mui/material"
+import LikedSongsPage from "../likedSongs";
 import Playlists from "../playlists";
 
 const sx = {
@@ -11,6 +12,7 @@ const sx = {
 const AppBody = () => {
   return (
     <Box sx={sx.body}>
+      <LikedSongsPage/>
       {/* <Playlists/> */}
     </Box>
   )
