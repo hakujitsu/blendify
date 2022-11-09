@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useAuthContext } from "../auth/useAuthContext"
 
 const useLikedSongs = () => {
-  const [likedSongs, setLikedSongs] = useState(null)
+  const [likedSongs, setLikedSongs] = useState([])
   const [offset, setOffset] = useState(0)
   const {getAccessToken} = useAuthContext()
 
@@ -17,11 +17,13 @@ const useLikedSongs = () => {
         },
         body: JSON.stringify({
           access_token,
-          offset: offset ? offset : 0
+          offset: offset
         })
       });
       const data = await res.json();
-      console.log(data)
+      const updatedSongs = likedSongs.concat(data.data)
+      setLikedSongs(updatedSongs)
+      setOffset(offset + 1)
     }
   };
 

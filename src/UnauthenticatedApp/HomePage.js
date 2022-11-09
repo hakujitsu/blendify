@@ -34,10 +34,12 @@ const HomePage = () => {
 
   return (
     <>
-      {loading ? <LoadingScreen /> :
-        <Link href={"https://accounts.spotify.com/authorize?" + generateQueryString()} >
+      {loading
+        ? <LoadingScreen />
+        : <Link href={"https://accounts.spotify.com/authorize?" + generateQueryString()} >
           Log into Spotify
-        </Link>}
+        </Link>
+      }
     </>
   );
 };
