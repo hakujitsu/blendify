@@ -7,7 +7,6 @@ const sx = {
   table: {
     tableLayout: "fixed",
     maxWidth: "100%",
-    // backgroundColor: "cyan"
   },
   spacerRow: {
     height: "16px"
