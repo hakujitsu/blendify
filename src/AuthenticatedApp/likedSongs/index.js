@@ -6,12 +6,13 @@ import useLikedSongs from "../../hooks/data/useLikedSongs";
 const sx = {
   stack: {
     mx: 4,
-    my: 4
+    my: 4,
+    maxWidth: "100%",
   }
 }
 
 const LikedSongsPage = () => {
-  const { likedSongs, getLikedSongs } = useLikedSongs()
+  const { hasMoreSongs, likedSongs, getLikedSongs } = useLikedSongs()
 
   useEffect(() => {
     getLikedSongs()
@@ -21,7 +22,7 @@ const LikedSongsPage = () => {
   return (
     <Stack sx={sx.stack}>
       <Typography>Liked Songs</Typography>
-      <SongDisplay songs={likedSongs}/>
+      <SongDisplay hasMoreSongs={hasMoreSongs} songs={likedSongs} getSongs={getLikedSongs}/>
     </Stack>
   )
 }

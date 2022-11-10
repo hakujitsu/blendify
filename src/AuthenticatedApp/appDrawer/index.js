@@ -7,7 +7,7 @@ const drawerWidth = 240;
 const sx = {
   drawer: {
     height: "calc(100vh - 84px)",
-    width: drawerWidth,
+    minWidth: drawerWidth,
     backgroundColor: 'background.drawer',
     borderRight: 1,
     borderColor: 'background.border',

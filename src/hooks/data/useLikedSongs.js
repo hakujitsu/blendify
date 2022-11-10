@@ -3,8 +3,9 @@ import { useAuthContext } from "../auth/useAuthContext"
 
 const useLikedSongs = () => {
   const [likedSongs, setLikedSongs] = useState([])
+  const [hasMoreSongs, setHasMoreSongs] = useState(true);
   const [offset, setOffset] = useState(0)
-  const {getAccessToken} = useAuthContext()
+  const { getAccessToken } = useAuthContext()
 
   const getLikedSongs = async () => {
     const access_token = getAccessToken()
@@ -22,12 +23,13 @@ const useLikedSongs = () => {
       });
       const data = await res.json();
       const updatedSongs = likedSongs.concat(data.data)
+      setHasMoreSongs(data.hasMoreSongs);
       setLikedSongs(updatedSongs)
       setOffset(offset + 1)
     }
   };
 
-  return {likedSongs, getLikedSongs}
+  return { hasMoreSongs, likedSongs, getLikedSongs }
 }
 
 export default useLikedSongs;

@@ -1,18 +1,18 @@
-import { Box, Stack } from "@mui/material"
+import { Box } from "@mui/material"
 import LikedSongsPage from "../likedSongs";
 import Playlists from "../playlists";
 
 const sx = {
   body: {
     height: `calc(100vh - 84px - 64px)`,
-    overflowY: "auto"
+    overflowY: "auto",
   },
 }
 
 const AppBody = () => {
   return (
     <Box sx={sx.body}>
-      <LikedSongsPage/>
+      <LikedSongsPage />
       {/* <Playlists/> */}
     </Box>
   )
