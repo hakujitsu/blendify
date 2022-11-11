@@ -1,7 +1,6 @@
-import { Table, TableBody, TableRow, useMediaQuery, useTheme } from '@mui/material';
-import SongTableSkeletonRow from './skeletonRow';
+import { Table, useMediaQuery, useTheme } from '@mui/material';
+import SongTableBody from './tableBody';
 import SongTableHeader from './tableHeader';
-import SongTableRow from './tableRow';
 
 const sx = {
   table: {
@@ -16,31 +15,19 @@ const sx = {
 const SongDisplay = (props) => {
   const { hasMoreSongs, getSongs, songs } = props
   const theme = useTheme();
-  const lessThanMd = useMediaQuery(theme.breakpoints.down('lg'));
-  const lessThanSm = useMediaQuery(theme.breakpoints.down('md'));
-
-  console.log(songs)
-
-  console.log("showAlbum " + !lessThanSm)
-  console.log("showDate " + !lessThanMd)
+  const lessThanLg = useMediaQuery(theme.breakpoints.down('lg'));
+  const lessThanMd = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Table aria-label="song list" stickyHeader size="small" style={sx.table}>
-      <SongTableHeader showAlbum={!lessThanSm} showDate={!lessThanMd} />
-      <TableBody>
-      <TableRow sx={sx.spacerRow} />
-        {songs.map((song, index) => (
-          <SongTableRow
-            key={song.track.uri}
-            index={index}
-            song={song}
-            showAlbum={!lessThanSm}
-            showDate={!lessThanMd} />
-        ))}
-        {hasMoreSongs &&
-          <SongTableSkeletonRow />
-        }
-      </TableBody>
+      <SongTableHeader showAlbum={!lessThanMd} showDate={!lessThanLg} />
+      <SongTableBody
+        songs={songs}
+        hasMoreSongs={hasMoreSongs}
+        getSongs={getSongs}
+        showAlbum={!lessThanMd}
+        showDate={!lessThanLg}
+      />
     </Table>
   );
 

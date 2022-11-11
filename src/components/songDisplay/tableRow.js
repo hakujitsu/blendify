@@ -3,6 +3,7 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { convertMsToSongDuration, getDateAddedString } from "../../util/datetime";
 import SongTitleCell from "./songTitleCell";
+import React from "react";
 
 const sx = {
   firstCell: {
@@ -25,10 +26,10 @@ const sx = {
   },
 }
 
-const SongTableRow = (props) => {
+const SongTableRow = React.forwardRef((props, ref) => {
   const { song, index, showAlbum, showDate } = props
   return (
-    <TableRow hover sx={sx.row} >
+    <TableRow hover sx={sx.row} ref={ref}>
       <TableCell component="th" scope="row" sx={sx.firstCell}>
         {index + 1}
       </TableCell>
@@ -53,6 +54,6 @@ const SongTableRow = (props) => {
       </TableCell>
     </TableRow>
   )
-}
+})
 
 export default SongTableRow;

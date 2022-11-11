@@ -3,6 +3,8 @@ import AppHeader from "./appHeader";
 import AppDrawer from "./appDrawer";
 import AppBody from "./appBody";
 import AppFooter from "./appFooter";
+import { store } from '../store/index'
+import { Provider } from 'react-redux'
 
 const sx = {
   container: {
@@ -53,4 +55,13 @@ const AuthenticatedApp = () => {
   )
 }
 
-export default AuthenticatedApp;
+
+const AuthenticatedAppWrapper = () => {
+  return (
+    <Provider store={store}>
+      <AuthenticatedApp />
+    </Provider>
+  )
+}
+
+export default AuthenticatedAppWrapper;

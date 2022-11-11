@@ -46,7 +46,7 @@ const SongTableSkeletonRow = () => {
         <Skeleton animation={false}/>
       </TableCell>
       <TableCell>
-        <Skeleton variant="rounded" animation={false} />
+        <Skeleton variant="rounded" animation={false} width="18px"/>
       </TableCell>
       <TableCell align="right">
         <Skeleton animation={false} />

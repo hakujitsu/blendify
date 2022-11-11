@@ -1,14 +1,21 @@
-import { useState } from "react"
+import { useRef } from "react"
 import { useAuthContext } from "../auth/useAuthContext"
+import _ from 'lodash';
+import { useSelector, useDispatch } from 'react-redux'
+import { getSongs } from '../../store/slices/likedSongs'
+
 
 const useLikedSongs = () => {
-  const [likedSongs, setLikedSongs] = useState([])
-  const [hasMoreSongs, setHasMoreSongs] = useState(true);
-  const [offset, setOffset] = useState(0)
   const { getAccessToken } = useAuthContext()
+  const dispatch = useDispatch();
+  const { songs, offset, totalNumber, hasMoreSongs } = useSelector((state) => state.likedSongs)
 
   const getLikedSongs = async () => {
+    if (!hasMoreSongs) {
+      return
+    }
     const access_token = getAccessToken()
+    const currentOffset = offset;
 
     if (access_token) {
       const res = await fetch(`/api/data/getSavedTracks`, {
@@ -18,18 +25,19 @@ const useLikedSongs = () => {
         },
         body: JSON.stringify({
           access_token,
-          offset: offset
+          offset: currentOffset
         })
       });
-      const data = await res.json();
-      const updatedSongs = likedSongs.concat(data.data)
-      setHasMoreSongs(data.hasMoreSongs);
-      setLikedSongs(updatedSongs)
-      setOffset(offset + 1)
+      const { data, total } = await res.json();
+      dispatch(getSongs({ totalNumber: total, offset: currentOffset, songsToAdd: data }))
     }
   };
 
-  return { hasMoreSongs, likedSongs, getLikedSongs }
+  // const debouncedGetSongs = useRef(
+  //   _.debounce(getLikedSongs, 1000)
+  // ).current;
+
+  return { totalNumber, hasMoreSongs, likedSongs: songs, getLikedSongs: getLikedSongs }
 }
 
 export default useLikedSongs;
