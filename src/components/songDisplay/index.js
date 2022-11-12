@@ -13,7 +13,7 @@ const sx = {
 }
 
 const SongDisplay = (props) => {
-  const { hasMoreSongs, getSongs, songs } = props
+  const { hasMoreSongs, getSongs, songs, totalNumber } = props
   const theme = useTheme();
   const lessThanLg = useMediaQuery(theme.breakpoints.down('lg'));
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'));
@@ -25,6 +25,7 @@ const SongDisplay = (props) => {
         songs={songs}
         hasMoreSongs={hasMoreSongs}
         getSongs={getSongs}
+        totalNumber={totalNumber}
         showAlbum={!lessThanMd}
         showDate={!lessThanLg}
       />

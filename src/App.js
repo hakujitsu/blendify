@@ -3,6 +3,7 @@ import {
   createRoutesFromElements,
   Route,
   RouterProvider,
+  Navigate,
 } from "react-router-dom";
 import HomePage from "./UnauthenticatedApp/HomePage";
 import Callback from "./UnauthenticatedApp/Callback";
@@ -16,12 +17,15 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from "@mui/material";
 import darkTheme from "./styles/theme"
 import './App.css';
+import Playlists from "./AuthenticatedApp/playlists";
+import LikedSongsPage from "./AuthenticatedApp/likedSongs";
 
 const unauthenticatedRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route path="/" element={<HomePage />} />
       <Route path="/callback" element={<Callback />} />
+      <Route path="/*" element={<Navigate to="/" replace />} />
     </Route>
   )
 );
@@ -30,7 +34,18 @@ const authenticatedRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route path="/" element={<AuthenticatedApp />} />
-      <Route path="/callback" element={<Callback />} />
+      <Route path="/*" element={<Navigate to="/" replace />} />
+    </Route>
+  )
+);
+
+const playerRouter = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<AuthenticatedApp />}>
+      <Route path="/" element={<Playlists />} index />
+      <Route path="playlists" element={<Playlists />} />
+      <Route path="liked-songs" element={<LikedSongsPage />} />
+      <Route path="/callback" element={<Navigate to="/" replace />} />
     </Route>
   )
 );
@@ -42,7 +57,8 @@ function App() {
   return (
     <>
       {isLoggedIn() ? (
-        <RouterProvider router={authenticatedRouter} />
+        // <AuthenticatedApp />
+        <RouterProvider router={playerRouter} />
       ) : (
         <RouterProvider router={unauthenticatedRouter} />
       )}

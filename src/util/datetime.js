@@ -1,4 +1,5 @@
 import { format, intervalToDuration, isWithinInterval, subMonths } from 'date-fns'
+import pluralize from 'pluralize'
 
 export const convertMsToSongDuration = (ms) => {
   const duration = intervalToDuration({ start: 0, end: ms })
@@ -33,13 +34,13 @@ export const getDateAddedString = (dateString) => {
       end: currentDate
     })
     if (duration.days) {
-      return `${duration.days} days ago`
+      return `${duration.days} ${pluralize("day", duration.days)} ago`
     } else if (duration.hours) {
-      return `${duration.hours} hours ago`
+      return `${duration.hours} ${pluralize("hour", duration.hours)} ago`
     } else if (duration.minutes) {
-      return `${duration.minutes} minutes ago`
+      return `${duration.minutes} ${pluralize("minute", duration.minutes)} ago`
     } else if (duration.seconds) {
-      return `${duration.seconds} seconds ago`
+      return `${duration.seconds} ${pluralize("second", duration.seconds)} ago`
     }
     throw Error("Date Formatting Error")
 

@@ -2,8 +2,15 @@ import { Skeleton, Stack, TableCell, TableRow } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
 
 const sx = {
+  firstCell: {
+    borderTopLeftRadius: "16px",
+    borderBottomLeftRadius: "16px"
+  },
+  lastCell: {
+    borderTopRightRadius: "16px",
+    borderBottomRightRadius: "16px"
+  },
   row: {
-    // backgroundColor: "cyan",
     '&:last-child td, &:last-child th': { border: 0 },
     [`& .${tableCellClasses.root}`]: {
       borderBottom: "none",
@@ -18,7 +25,7 @@ const SongTableSkeletonRow = () => {
       hover
       sx={sx.row}
     >
-      <TableCell component="th" scope="row">
+      <TableCell component="th" scope="row" sx={sx.firstCell}>
         <Skeleton variant="rounded" animation={false} width="18px"/>
       </TableCell>
       <TableCell>
@@ -48,7 +55,7 @@ const SongTableSkeletonRow = () => {
       <TableCell>
         <Skeleton variant="rounded" animation={false} width="18px"/>
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="right" sx={sx.lastCell}>
         <Skeleton animation={false} />
       </TableCell>
     </TableRow>

@@ -4,6 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import AlbumIcon from '@mui/icons-material/Album';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import { useNavigate } from "react-router-dom";
 
 
 const sx = {
@@ -14,24 +15,28 @@ const sx = {
   menuItem: {
     py: 1.5,
     mx: 1,
+    borderRadius: "16px",
   }
 }
 
 const MENU_ITEMS = [
   {
     icon: <HomeIcon fontSize="medium" />,
-    text: "Home"
+    text: "Home",
+    route: "/"
   },
   {
     icon: <FavoriteIcon fontSize="medium" />,
-    text: "Liked Songs"
+    text: "Liked Songs",
+    route: "/liked-songs"
   }, {
     icon: <LibraryMusicIcon fontSize="medium" />,
-    text: "Playlists"
+    text: "Playlists",
+    route: "/playlists"
   },
   // {
   //   icon: <AlbumIcon fontSize="medium" />,
-  //   text: "Album"
+  //   text: "Albums"
   // }, {
   //   icon: <PeopleAltIcon fontSize="medium" />,
   //   text: "Artists"
@@ -39,10 +44,14 @@ const MENU_ITEMS = [
 ]
 
 const DrawerMenu = () => {
+  const navigate = useNavigate();
+
   return (
     <MenuList sx={{ width: '100%' }}>
       {MENU_ITEMS.map(item => (
-        <MenuItem key={item.text} sx={sx.menuItem}>
+        <MenuItem key={item.text} sx={sx.menuItem}
+          onClick={() => navigate(item.route)}
+        >
           <ListItemIcon>
             {item.icon}
           </ListItemIcon>

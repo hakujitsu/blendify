@@ -12,7 +12,7 @@ const sx = {
 }
 
 const LikedSongsPage = () => {
-  const { hasMoreSongs, likedSongs, getLikedSongs } = useLikedSongs()
+  const { hasMoreSongs, likedSongs, getLikedSongs, totalNumber } = useLikedSongs()
 
   useEffect(() => {
     getLikedSongs()
@@ -22,7 +22,7 @@ const LikedSongsPage = () => {
   return (
     <Stack sx={sx.stack}>
       <Typography>Liked Songs</Typography>
-      <SongDisplay hasMoreSongs={hasMoreSongs} songs={likedSongs} getSongs={getLikedSongs}/>
+      <SongDisplay hasMoreSongs={hasMoreSongs} songs={likedSongs} getSongs={getLikedSongs} totalNumber={totalNumber}/>
     </Stack>
   )
 }

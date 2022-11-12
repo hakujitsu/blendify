@@ -1,9 +1,6 @@
-import { useRef } from "react"
 import { useAuthContext } from "../auth/useAuthContext"
-import _ from 'lodash';
 import { useSelector, useDispatch } from 'react-redux'
 import { getSongs } from '../../store/slices/likedSongs'
-
 
 const useLikedSongs = () => {
   const { getAccessToken } = useAuthContext()
@@ -32,10 +29,6 @@ const useLikedSongs = () => {
       dispatch(getSongs({ totalNumber: total, offset: currentOffset, songsToAdd: data }))
     }
   };
-
-  // const debouncedGetSongs = useRef(
-  //   _.debounce(getLikedSongs, 1000)
-  // ).current;
 
   return { totalNumber, hasMoreSongs, likedSongs: songs, getLikedSongs: getLikedSongs }
 }

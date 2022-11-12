@@ -2,6 +2,7 @@ import { TableBody, TableRow } from '@mui/material';
 import { useEffect, useState, useRef } from 'react';
 import SongTableSkeletonRow from './skeletonRow';
 import SongTableRow from './tableRow';
+import _ from 'lodash';
 
 const sx = {
   table: {
@@ -13,21 +14,18 @@ const sx = {
   }
 }
 
-
 const SongTableBody = (props) => {
-  const { songs, hasMoreSongs, getSongs, showAlbum, showDate } = props;
+  const { songs, hasMoreSongs, getSongs, totalNumber, showAlbum, showDate } = props;
   const [observedElement, setObservedElement] = useState(null)
 
-  const observer = useRef(
-    new IntersectionObserver(getSongs)
-  );
+  const observer = useRef(new IntersectionObserver(_.debounce(getSongs, 1000)));
 
   useEffect(() => {
     if (!(observedElement && observer)) {
       return
     }
 
-    observer.current = new IntersectionObserver(getSongs)
+    observer.current = new IntersectionObserver(_.debounce(getSongs, 500))
 
     const currentObserver = observer.current;
     const rowToObserve = observedElement
@@ -42,7 +40,7 @@ const SongTableBody = (props) => {
         currentObserver.unobserve(observedElement);
       }
     };
-  }, [songs, observedElement])
+  }, [getSongs, observedElement])
 
 
   return (
@@ -71,12 +69,11 @@ const SongTableBody = (props) => {
           )
         }
       })}
-      {hasMoreSongs && new Array(50).fill(0).map((_, index) => (
+      {hasMoreSongs && new Array(totalNumber > 0 ? totalNumber - songs.length : 10).fill(0).map((_, index) => (
         <SongTableSkeletonRow key={index} />
       ))}
     </TableBody>
   )
-
 }
 
 export default SongTableBody;
