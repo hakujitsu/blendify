@@ -1,6 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 import SongDisplay from "../../components/songDisplay";
+import TestSongDisplay from "../../components/virtualisedDisplay/test";
 import useLikedSongs from "../../hooks/data/useLikedSongs";
 
 const sx = {
@@ -22,7 +23,7 @@ const LikedSongsPage = () => {
   return (
     <Stack sx={sx.stack}>
       <Typography>Liked Songs</Typography>
-      <SongDisplay hasMoreSongs={hasMoreSongs} songs={likedSongs} getSongs={getLikedSongs} totalNumber={totalNumber}/>
+      <TestSongDisplay hasMoreSongs={hasMoreSongs} songs={likedSongs} getSongs={getLikedSongs} totalNumber={totalNumber}/>
     </Stack>
   )
 }
