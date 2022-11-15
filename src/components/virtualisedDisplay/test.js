@@ -21,31 +21,31 @@ const TestSongDisplay = (props) => {
   const theme = useTheme();
   const lessThanLg = useMediaQuery(theme.breakpoints.down('lg'));
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'));
-  const [observedElement, setObservedElement] = useState(null)
+  // const [observedElement, setObservedElement] = useState(null)
 
-  const observer = useRef(new IntersectionObserver(_.debounce(getSongs, 1000)));
+  // const observer = useRef(new IntersectionObserver(_.debounce(getSongs, 1000)));
 
-  useEffect(() => {
-    if (!(observedElement && observer)) {
-      return
-    }
+  // useEffect(() => {
+  //   if (!(observedElement && observer)) {
+  //     return
+  //   }
 
-    observer.current = new IntersectionObserver(_.debounce(getSongs, 500))
+  //   observer.current = new IntersectionObserver(_.debounce(getSongs, 500))
 
-    const currentObserver = observer.current;
-    const rowToObserve = observedElement
+  //   const currentObserver = observer.current;
+  //   const rowToObserve = observedElement
 
-    if (hasMoreSongs) {
-      currentObserver.observe(rowToObserve);
-    } else {
-      currentObserver.unobserve(rowToObserve)
-    }
-    return () => {
-      if (currentObserver && observedElement) {
-        currentObserver.unobserve(observedElement);
-      }
-    };
-  }, [getSongs, observedElement])
+  //   if (hasMoreSongs) {
+  //     currentObserver.observe(rowToObserve);
+  //   } else {
+  //     currentObserver.unobserve(rowToObserve)
+  //   }
+  //   return () => {
+  //     if (currentObserver && observedElement) {
+  //       currentObserver.unobserve(observedElement);
+  //     }
+  //   };
+  // }, [getSongs, observedElement])
 
   return (
     <Box style={sx.table}>

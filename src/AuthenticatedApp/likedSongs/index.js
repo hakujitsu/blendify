@@ -1,6 +1,7 @@
 import { useTheme } from "@emotion/react";
 import { Stack, Typography, useMediaQuery } from "@mui/material";
-import { useEffect, useRef } from "react";
+import _ from "lodash";
+import { useEffect, useRef, useState } from "react";
 import SongDisplay from "../../components/songDisplay";
 import TestSongDisplay from "../../components/virtualisedDisplay/test";
 import useVirtualDisplay from "../../components/virtualisedDisplay/useVirtualDisplay";
@@ -24,15 +25,57 @@ const LikedSongsPage = () => {
   const lessThanLg = useMediaQuery(theme.breakpoints.down('lg'));
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'));
 
+  const [observedElement, setObservedElement] = useState(null)
+
+  const observer = useRef(new IntersectionObserver(_.debounce(getLikedSongs, 500)));
+
+  useEffect(() => {
+    if (!(observedElement && observer)) {
+      return
+    }
+
+    observer.current = new IntersectionObserver(_.debounce(getLikedSongs, 500))
+
+    const currentObserver = observer.current;
+    const rowToObserve = observedElement
+
+    if (hasMoreSongs) {
+      currentObserver.observe(rowToObserve);
+    } else {
+      currentObserver.unobserve(rowToObserve)
+    }
+    return () => {
+      if (currentObserver && observedElement) {
+        currentObserver.unobserve(observedElement);
+      }
+    };
+  }, [getLikedSongs, observedElement])
+
   const { onScroll, visibleChildren } = useVirtualDisplay({
-    children: likedSongs.map((song, index) => (
-      <VirtualSongRow
-        index={index}
-        song={song}
-        showAlbum={!lessThanMd}
-        showDate={!lessThanLg}
-      />
-    )),
+    children: likedSongs.map((song, index) => {
+      if (likedSongs.length >= 50 && index === likedSongs.length - 25) {
+        return (
+          <VirtualSongRow
+            index={index}
+            song={song}
+            showAlbum={!lessThanMd}
+            showDate={!lessThanLg}
+            ref={setObservedElement}
+          />
+        )
+      } else {
+        return (
+          <VirtualSongRow
+            index={index}
+            song={song}
+            showAlbum={!lessThanMd}
+            showDate={!lessThanLg}
+          />
+          )
+
+      }
+      
+    }),
     rowHeight: 64,
     skeletonRow: <VirtualSongRowSkeleton showAlbum={!lessThanMd} showDate={!lessThanLg} />,
   })

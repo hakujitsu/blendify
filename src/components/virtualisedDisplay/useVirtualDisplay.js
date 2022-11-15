@@ -5,16 +5,6 @@ import usePlaylistTableHeight from "../../hooks/usePlaylistTableHeight";
 const BUFFERED_ITEMS = 10;
 const SKELETON_COUNT = 100;
 
-const parseScrollIndex = (index) => {
-  if (index < 168) {
-    return 0
-  } else if (index < 218) {
-    return index
-  } else {
-    return index - 50 - 168
-  }
-}
-
 const useVirtualDisplay = (props) => {
   const {
     isVirtualizationEnabled = true,
@@ -101,7 +91,6 @@ const useVirtualDisplay = (props) => {
           {skeletonRow}
         </div>
       )
-
     });
 
     return (skeletonAbove.concat(visibleComponents)).concat(skeletonBelow);
