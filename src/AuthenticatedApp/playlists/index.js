@@ -1,4 +1,12 @@
 import { useEffect, useState } from "react";
+import { BODY_HEIGHT } from "../../styles/layout";
+
+const sx = {
+  stack: {
+    maxHeight: BODY_HEIGHT,
+    maxWidth: "100%",
+  }
+}
 
 const Playlists = () => {
   const [list, setList] = useState([]);

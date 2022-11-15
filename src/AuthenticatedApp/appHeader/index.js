@@ -1,9 +1,10 @@
 import { Box, Stack } from "@mui/material";
+import { HEADER_HEIGHT } from "../../styles/layout";
 import UserBadge from "./userBadge";
 
 const sx = {
   headerContainer: {
-    height: "64px",
+    height: HEADER_HEIGHT,
     display: "flex",
     width: "100%",
     borderBottom: 1,

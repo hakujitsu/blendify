@@ -1,15 +1,16 @@
-import { Table, useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import VirtualWindow from '.';
-import SongTableSkeletonRow from '../songDisplay/skeletonRow';
-import SongTableHeader from '../songDisplay/tableHeader';
 import SongTableRow from '../songDisplay/tableRow';
 import _ from 'lodash';
+import SongHeader from '../virtualizedSongDisplay/songHeader';
+import { BODY_WIDTH } from '../../styles/layout';
+import VirtualSongRow from './virtualSongRow';
 
 const sx = {
   table: {
     tableLayout: "fixed",
-    maxWidth: "100%",
+    maxWidth: BODY_WIDTH,
   },
   spacerRow: {
     height: "16px"
@@ -17,7 +18,7 @@ const sx = {
 }
 
 const TestSongDisplay = (props) => {
-  const { hasMoreSongs, getSongs, songs, totalNumber } = props
+  const { hasMoreSongs, getSongs, songs, totalNumber, visibleChildren } = props
   const theme = useTheme();
   const lessThanLg = useMediaQuery(theme.breakpoints.down('lg'));
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'));
@@ -48,44 +49,11 @@ const TestSongDisplay = (props) => {
   }, [getSongs, observedElement])
 
   return (
-    <Table aria-label="song list" stickyHeader size="small" style={sx.table}>
-      <SongTableHeader showAlbum={!lessThanMd} showDate={!lessThanLg} />
-      {/* <TableRow sx={sx.spacerRow} /> */}
-      <VirtualWindow children={
-        songs.map((song, index) => {
-          if (songs.length >= 50 && index === songs.length - 25) {
-            return (
-              <SongTableRow
-                key={song.track.uri}
-                index={index}
-                song={song}
-                showAlbum={!lessThanMd}
-                showDate={!lessThanLg}
-                ref={setObservedElement}
-              />
-            )
-          } else {
-            return (
-              <SongTableRow
-                key={song.track.uri}
-                index={index}
-                song={song}
-                showAlbum={!lessThanMd}
-                showDate={!lessThanLg}
-              />
-            )
-          }
-        }).concat(
-          hasMoreSongs
-            ? new Array(totalNumber > 0 ? totalNumber - songs.length : 10).fill(0).map((_, index) => (
-              <SongTableSkeletonRow key={index} />
-            ))
-            : []
-        )
-      }
-        rowHeight={60}
+    <Box style={sx.table}>
+      <SongHeader showAlbum={!lessThanMd} showDate={!lessThanLg} />
+      <VirtualWindow visibleChildren={visibleChildren}
       />
-    </Table>
+    </Box>
   );
 
 }

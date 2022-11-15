@@ -1,13 +1,12 @@
 import { Box, Stack } from "@mui/material"
 import Logo from "./logo";
 import DrawerMenu from "./drawerMenu";
-
-const drawerWidth = 240;
+import { DRAWER_WIDTH, FOOTER_HEIGHT } from "../../styles/layout";
 
 const sx = {
   drawer: {
-    height: "calc(100vh - 84px)",
-    minWidth: drawerWidth,
+    height: `calc(100vh - ${FOOTER_HEIGHT})`,
+    width: DRAWER_WIDTH,
     backgroundColor: 'background.drawer',
     borderRight: 1,
     borderColor: 'background.border',

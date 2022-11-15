@@ -5,6 +5,7 @@ import AppBody from "./appBody";
 import AppFooter from "./appFooter";
 import { store } from '../store/index'
 import { Provider } from 'react-redux'
+import { DRAWER_WIDTH } from "../styles/layout";
 
 const sx = {
   container: {
@@ -14,6 +15,7 @@ const sx = {
   main: {
     flexGrow: 1,
     bgcolor: 'background.default',
+    width: `calc(100vw - ${DRAWER_WIDTH}`
   },
   body: {
     height: "100%",
