@@ -11,7 +11,7 @@ const sx = {
 }
 
 const VirtualSongRow = (props) => {
-  const { song, index, style ={}, showAlbum, showDate } = props;
+  const { song, index, showAlbum, showDate } = props;
 
   return (
     <RowLayout
@@ -33,7 +33,6 @@ const VirtualSongRow = (props) => {
       }
       showAlbum={showAlbum}
       showDate={showDate}
-      style={style}
     />
   )
 }

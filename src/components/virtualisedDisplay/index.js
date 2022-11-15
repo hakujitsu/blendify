@@ -1,21 +1,16 @@
-import { throttle } from "lodash";
-import React, { useMemo, useRef, useState } from "react";
 import usePlaylistTableHeight from "../../hooks/usePlaylistTableHeight";
 
 
 const VirtualWindow = (props) => {
-  const {
-    visibleChildren
-  } = props
+  const { visibleChildren, numberOfItems } = props
+  // const { playlistTableHeight } = usePlaylistTableHeight()
 
   return (
     <div
       style={{
-        // overflowY: "scroll",
         position: "relative",
-        height: "600px"
+        height: (numberOfItems * 64) + 'px'
       }}
-      // ref={ref}
     >
       {visibleChildren}
     </div>

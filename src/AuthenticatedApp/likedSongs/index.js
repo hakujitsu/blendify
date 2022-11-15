@@ -5,6 +5,7 @@ import SongDisplay from "../../components/songDisplay";
 import TestSongDisplay from "../../components/virtualisedDisplay/test";
 import useVirtualDisplay from "../../components/virtualisedDisplay/useVirtualDisplay";
 import VirtualSongRow from "../../components/virtualisedDisplay/virtualSongRow";
+import VirtualSongRowSkeleton from "../../components/virtualisedDisplay/virtualSongRowSkeleton";
 import useLikedSongs from "../../hooks/data/useLikedSongs";
 import { BODY_HEIGHT, BODY_WIDTH } from "../../styles/layout";
 import LikedSongsLabel from "./label";
@@ -22,17 +23,19 @@ const LikedSongsPage = () => {
   const theme = useTheme();
   const lessThanLg = useMediaQuery(theme.breakpoints.down('lg'));
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'));
-  const {onScroll, visibleChildren } = useVirtualDisplay({
+  const { onScroll, visibleChildren } = useVirtualDisplay({
     children: likedSongs.map((song, index) => (
       <VirtualSongRow
-        key={song.track.uri}
+        // key={index}
+        // key={song?.track?.uri}
         index={index}
         song={song}
         showAlbum={!lessThanMd}
         showDate={!lessThanLg}
       />
     )),
-    rowHeight: 60
+    rowHeight: 64,
+    skeletonRow: <VirtualSongRowSkeleton showAlbum={!lessThanMd} showDate={!lessThanLg} />
   })
 
   useEffect(() => {
@@ -50,7 +53,7 @@ const LikedSongsPage = () => {
       onScroll={onScroll}
     >
       <LikedSongsLabel />
-      <TestSongDisplay hasMoreSongs={hasMoreSongs} songs={likedSongs} getSongs={getLikedSongs} totalNumber={totalNumber} visibleChildren={visibleChildren}/>
+      <TestSongDisplay hasMoreSongs={hasMoreSongs} songs={likedSongs} getSongs={getLikedSongs} totalNumber={totalNumber} visibleChildren={visibleChildren} />
     </Stack>
   )
 }

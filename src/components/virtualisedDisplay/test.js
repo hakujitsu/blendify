@@ -51,8 +51,7 @@ const TestSongDisplay = (props) => {
   return (
     <Box style={sx.table}>
       <SongHeader showAlbum={!lessThanMd} showDate={!lessThanLg} />
-      <VirtualWindow visibleChildren={visibleChildren}
-      />
+      <VirtualWindow visibleChildren={visibleChildren} numberOfItems={songs.length} />
     </Box>
   );
 

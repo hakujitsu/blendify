@@ -15,6 +15,7 @@ const sx = {
     borderRadius: "16px",
   },
   hoverStyles: {
+    height: "64px",
     "&:hover": {
       backgroundColor: '#2b1743'
     }
