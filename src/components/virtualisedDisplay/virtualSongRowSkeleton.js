@@ -21,16 +21,16 @@ const VirtualSongRowSkeleton = (props) => {
             justifyContent="center"
             spacing={0.5}
           >
-            <Skeleton animation={false} width="156px" />
-            <Skeleton animation={false} width="128px" />
+            <Skeleton animation={false} height="24px"  width="156px" />
+            <Skeleton animation={false}  height="24px"  width="128px" />
           </Stack>
         </Stack>
       }
-      albumContent={<Skeleton animation={false} width="140px" />}
-      dateContent={<Skeleton animation={false} />}
+      albumContent={<Skeleton animation={false}  height="24px"  width="140px" />}
+      dateContent={<Skeleton animation={false} height="24px"/>}
       likedContent={<Skeleton variant="rounded" animation={false} width="18px" />}
       durationContent={
-        <Skeleton animation={false} />
+        <Skeleton animation={false} height="24px" />
       }
       showAlbum={showAlbum}
       showDate={showDate}

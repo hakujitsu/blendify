@@ -3,7 +3,17 @@ import { cloneElement, useMemo, useState } from "react";
 import usePlaylistTableHeight from "../../hooks/usePlaylistTableHeight";
 
 const BUFFERED_ITEMS = 10;
-const SKELETON_COUNT = 150;
+const SKELETON_COUNT = 100;
+
+const parseScrollIndex = (index) => {
+  if (index < 168) {
+    return 0
+  } else if (index < 218) {
+    return index
+  } else {
+    return index - 50 - 168
+  }
+}
 
 const useVirtualDisplay = (props) => {
   const {
@@ -14,7 +24,6 @@ const useVirtualDisplay = (props) => {
   } = props
   const [scrollPosition, setScrollPosition] = useState(0);
   const { playlistTableHeight } = usePlaylistTableHeight()
-
 
   // get the children to be rendered
   const visibleChildren = useMemo(() => {
@@ -35,6 +44,7 @@ const useVirtualDisplay = (props) => {
         })
       );
     }
+
     const startIndex = Math.max(
       Math.floor(scrollPosition / rowHeight) - BUFFERED_ITEMS,
       0
@@ -48,59 +58,60 @@ const useVirtualDisplay = (props) => {
     const skeletonStart = Math.max(0, startIndex - SKELETON_COUNT)
     const skeletonEnd = Math.min(children.length - 1, endIndex + SKELETON_COUNT)
 
-    const skeletonAbove = children.slice(skeletonStart, startIndex).map((child, index) => {
-      return cloneElement(skeletonRow, {
-        style: {
+    const skeletonAbove = children.slice(skeletonStart, startIndex).map((_, index) => {
+      return (
+        <div style={{
           position: "absolute",
           top: (skeletonStart + index) * rowHeight,
           height: rowHeight,
           left: 0,
           right: 0,
           lineHeight: `${rowHeight}px`
-        },
-        key: index + skeletonStart
-      })
-    }
-    );
+        }} key={index + skeletonStart}>
+          {skeletonRow}
+        </div>
+      )
+    });
 
     const visibleComponents = children.slice(startIndex, endIndex + 1).map((child, index) => {
-      return cloneElement(child, {
-        style: {
+      return (
+        <div style={{
           position: "absolute",
           top: (startIndex + index) * rowHeight,
           height: rowHeight,
           left: 0,
           right: 0,
           lineHeight: `${rowHeight}px`
-        },
-        key: index + startIndex
-      })
+        }} key={index + startIndex}>
+          {child}
+        </div>
+      )
     });
 
-    const skeletonBelow = children.slice(endIndex + 1, skeletonEnd).map((child, index) => {
-      console.log((endIndex + 1 + index) * rowHeight)
-      return cloneElement(skeletonRow, {
-        style: {
+    const skeletonBelow = children.slice(endIndex + 1, skeletonEnd).map((_, index) => {
+      return (
+        <div style={{
           position: "absolute",
           top: (endIndex + 1 + index) * rowHeight,
           height: rowHeight,
           left: 0,
           right: 0,
           lineHeight: `${rowHeight}px`
-        }
-      })
+        }} key={index + endIndex + 1}>
+          {skeletonRow}
+        </div>
+      )
+
     });
 
-    // return (skeletonAbove.concat(visibleComponents));
     return (skeletonAbove.concat(visibleComponents)).concat(skeletonBelow);
-
   }, [
     children,
     skeletonRow,
     playlistTableHeight,
     rowHeight,
     scrollPosition,
-    isVirtualizationEnabled
+    isVirtualizationEnabled,
   ]);
 
   const onScroll = useMemo(

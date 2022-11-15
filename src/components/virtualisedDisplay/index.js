@@ -1,9 +1,6 @@
-import usePlaylistTableHeight from "../../hooks/usePlaylistTableHeight";
-
-
 const VirtualWindow = (props) => {
   const { visibleChildren, numberOfItems } = props
-  // const { playlistTableHeight } = usePlaylistTableHeight()
+  // console.log(numberOfItems)
 
   return (
     <div

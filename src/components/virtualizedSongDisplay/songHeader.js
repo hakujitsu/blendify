@@ -10,6 +10,7 @@ const sx = {
     py: 1,
     backgroundColor: "background.default",
     zIndex: 100,
+    height: "50px"
   },
   index: {
     height: "100%",

@@ -1,6 +1,6 @@
 import { useTheme } from "@emotion/react";
 import { Stack, Typography, useMediaQuery } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import SongDisplay from "../../components/songDisplay";
 import TestSongDisplay from "../../components/virtualisedDisplay/test";
 import useVirtualDisplay from "../../components/virtualisedDisplay/useVirtualDisplay";
@@ -23,11 +23,10 @@ const LikedSongsPage = () => {
   const theme = useTheme();
   const lessThanLg = useMediaQuery(theme.breakpoints.down('lg'));
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'));
+
   const { onScroll, visibleChildren } = useVirtualDisplay({
     children: likedSongs.map((song, index) => (
       <VirtualSongRow
-        // key={index}
-        // key={song?.track?.uri}
         index={index}
         song={song}
         showAlbum={!lessThanMd}
@@ -35,7 +34,7 @@ const LikedSongsPage = () => {
       />
     )),
     rowHeight: 64,
-    skeletonRow: <VirtualSongRowSkeleton showAlbum={!lessThanMd} showDate={!lessThanLg} />
+    skeletonRow: <VirtualSongRowSkeleton showAlbum={!lessThanMd} showDate={!lessThanLg} />,
   })
 
   useEffect(() => {

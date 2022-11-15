@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { convertMsToSongDuration, getDateAddedString } from "../../util/datetime";
 import RowLayout from "../virtualizedSongDisplay/rowLayout";

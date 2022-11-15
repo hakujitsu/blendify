@@ -9,11 +9,10 @@ import VirtualSongRow from './virtualSongRow';
 
 const sx = {
   table: {
-    tableLayout: "fixed",
     maxWidth: BODY_WIDTH,
   },
   spacerRow: {
-    height: "16px"
+    height: "12px"
   }
 }
 
@@ -51,6 +50,7 @@ const TestSongDisplay = (props) => {
   return (
     <Box style={sx.table}>
       <SongHeader showAlbum={!lessThanMd} showDate={!lessThanLg} />
+      <Box sx={sx.spacerRow}/>
       <VirtualWindow visibleChildren={visibleChildren} numberOfItems={songs.length} />
     </Box>
   );

@@ -12,7 +12,7 @@ export const BODY_HEIGHT = `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - $
 
 export const BODY_WIDTH = `calc(100vw - ${DRAWER_WIDTH} - ${BODY_MARGIN})`
 
-/** BODY CONSTANTS **/
+/** PLAYLIST BODY CONSTANTS **/
 
 export const PLAYLIST_TITLE_HEIGHT = "168px"
 
