@@ -2,7 +2,7 @@ import { throttle } from "lodash";
 import { cloneElement, useMemo, useState } from "react";
 import usePlaylistTableHeight from "../../hooks/usePlaylistTableHeight";
 
-const BUFFERED_ITEMS = 10;
+const BUFFERED_ITEMS = 5;
 const SKELETON_COUNT = 100;
 
 const useVirtualDisplay = (props) => {

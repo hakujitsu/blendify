@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { convertMsToSongDuration, getDateAddedString } from "../../util/datetime";
-import RowLayout from "../virtualizedSongDisplay/rowLayout";
-import SongTitleBox from "../virtualizedSongDisplay/songTitleCell";
+import RowLayout from "./rowLayout";
+import SongTitleBox from "./songTitleCell";
 import React from "react";
 
 const sx = {

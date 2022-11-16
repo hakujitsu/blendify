@@ -1,5 +1,5 @@
 import { Skeleton, Stack } from "@mui/material"
-import RowLayout from "../virtualizedSongDisplay/rowLayout"
+import RowLayout from "./rowLayout"
 
 const VirtualSongRowSkeleton = (props) => {
   const { showAlbum, showDate } = props
