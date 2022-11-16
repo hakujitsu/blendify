@@ -21,11 +21,11 @@ const PlaylistDesc = (props) => {
   const { title, desc, owner } = props;
   return (
     <>
-      <Typography gutterBottom variant="body2" noWrap sx={sx.playlistTitle}>
+      <Typography gutterBottom variant="body1" noWrap sx={sx.playlistTitle}>
         {title}
       </Typography>
       <Box sx={sx.playlistDescBox}>
-        <Typography variant="caption" color="text.secondary" component="div" sx={sx.playlistDesc}>
+        <Typography variant="body2" color="text.secondary" component="div" sx={sx.playlistDesc}>
           {desc ? desc : "By " + owner}
         </Typography>
       </Box>

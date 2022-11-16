@@ -1,7 +1,11 @@
-import { Card, CardMedia, Paper } from "@mui/material"
+import { Card, CardMedia, Fab, Fade, Paper } from "@mui/material"
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
+import PlayButton from "./playButton";
 
 const sx = {
+  cardContainer: {
+    position: 'relative'
+  },
   cardImage: {
     aspectRatio: "1",
     width: "100%"
@@ -16,13 +20,26 @@ const sx = {
   },
   placeholderIcon: {
     fontSize: "72px",
+  },
+  playButton: {
+    position: "absolute",
+    bottom: "4px",
+    right: "4px",
+    backgroundColor: "#cd5dde",
+    "&:hover": {
+      backgroundColor: "#cd5dde",
+    }
+  },
+  playIcon: {
+    color: "black",
   }
 }
 
 const PlaylistImage = (props) => {
-  const { title, img } = props
+  const { title, img, showPlayButton } = props
+
   return (
-    <Card elevation={3}>
+    <Card elevation={3} sx={sx.cardContainer}>
       {img ?
         <CardMedia
           component="img"
@@ -31,9 +48,10 @@ const PlaylistImage = (props) => {
           sx={sx.cardImage}
         /> :
         <Paper sx={[sx.cardImage, sx.placeholder]}>
-          <LibraryMusicIcon sx={sx.placeholderIcon}/>
+          <LibraryMusicIcon sx={sx.placeholderIcon} />
         </Paper>
       }
+      <PlayButton showPlayButton={showPlayButton} title={title} />
     </Card>
   )
 }
