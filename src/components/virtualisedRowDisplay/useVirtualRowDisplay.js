@@ -1,13 +1,12 @@
 import { throttle } from "lodash";
-import { cloneElement, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import usePlaylistTableHeight from "../../hooks/usePlaylistTableHeight";
 
 const BUFFERED_ITEMS = 5;
-const SKELETON_COUNT = 100;
+const SKELETON_COUNT = 40;
 
-const useVirtualDisplay = (props) => {
+const useVirtualRowDisplay = (props) => {
   const {
-    isVirtualizationEnabled = true,
     children,
     rowHeight,
     skeletonRow,
@@ -19,20 +18,6 @@ const useVirtualDisplay = (props) => {
   const visibleChildren = useMemo(() => {
     if (children.length === 0) {
       return []
-    }
-    if (!isVirtualizationEnabled) {
-      return children.map((child, index) =>
-        cloneElement(child, {
-          style: {
-            position: "absolute",
-            top: index * rowHeight,
-            height: rowHeight,
-            left: 0,
-            right: 0,
-            lineHeight: `${rowHeight}px`
-          }
-        })
-      );
     }
 
     const startIndex = Math.max(
@@ -100,7 +85,6 @@ const useVirtualDisplay = (props) => {
     playlistTableHeight,
     rowHeight,
     scrollPosition,
-    isVirtualizationEnabled,
   ]);
 
   const onScroll = useMemo(
@@ -118,4 +102,4 @@ const useVirtualDisplay = (props) => {
   return { onScroll, visibleChildren }
 }
 
-export default useVirtualDisplay;
+export default useVirtualRowDisplay;

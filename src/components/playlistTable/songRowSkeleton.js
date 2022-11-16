@@ -1,7 +1,7 @@
 import { Skeleton, Stack } from "@mui/material"
 import RowLayout from "./rowLayout"
 
-const VirtualSongRowSkeleton = (props) => {
+const SongRowSkeleton = (props) => {
   const { showAlbum, showDate } = props
   return (
     <RowLayout
@@ -38,4 +38,4 @@ const VirtualSongRowSkeleton = (props) => {
   )
 }
 
-export default VirtualSongRowSkeleton;
+export default SongRowSkeleton;

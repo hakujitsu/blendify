@@ -1,14 +1,13 @@
 import { useTheme } from "@emotion/react";
 import { Stack, useMediaQuery } from "@mui/material";
-import _ from "lodash";
 import { useEffect, useRef, useState } from "react";
-import TestSongDisplay from "../../components/virtualisedDisplay/test";
-import useVirtualDisplay from "../../components/virtualisedDisplay/useVirtualDisplay";
-import VirtualSongRow from "../../components/virtualisedDisplay/virtualSongRow";
-import VirtualSongRowSkeleton from "../../components/virtualisedDisplay/virtualSongRowSkeleton";
+import PlaylistTable from "../../components/playlistTable";
+import useVirtualRowDisplay from "../../components/virtualisedRowDisplay/useVirtualRowDisplay";
+import SongRowSkeleton from "../../components/playlistTable/songRowSkeleton";
 import useLikedSongs from "../../hooks/data/useLikedSongs";
 import { BODY_HEIGHT, BODY_WIDTH } from "../../styles/layout";
-import LikedSongsLabel from "./label";
+import PlaylistLabel from "../../components/playlistLabel";
+import useGenerateRows from "../../components/playlistTable/useGenerateRows";
 
 const sx = {
   stack: {
@@ -18,6 +17,8 @@ const sx = {
   }
 }
 
+// TODO: add observer for skeleton elements
+
 const LikedSongsPage = () => {
   const { hasMoreSongs, likedSongs, getLikedSongs, totalNumber } = useLikedSongs()
   const theme = useTheme();
@@ -26,14 +27,14 @@ const LikedSongsPage = () => {
 
   const [observedElement, setObservedElement] = useState(null)
 
-  const observer = useRef(new IntersectionObserver(_.debounce(getLikedSongs, 500)));
+  const observer = useRef(new IntersectionObserver(getLikedSongs));
 
   useEffect(() => {
     if (!(observedElement && observer)) {
       return
     }
 
-    observer.current = new IntersectionObserver(_.debounce(getLikedSongs, 500))
+    observer.current = new IntersectionObserver(getLikedSongs)
 
     const currentObserver = observer.current;
     const rowToObserve = observedElement
@@ -50,38 +51,18 @@ const LikedSongsPage = () => {
     };
   }, [getLikedSongs, observedElement])
 
-  const { onScroll, visibleChildren } = useVirtualDisplay({
-    children: likedSongs.map((song, index) => {
-      if (likedSongs.length >= 50 && index === likedSongs.length - 25) {
-        return (
-          <VirtualSongRow
-            index={index}
-            song={song}
-            showAlbum={!lessThanMd}
-            showDate={!lessThanLg}
-            ref={setObservedElement}
-          />
-        )
-      } else {
-        return (
-          <VirtualSongRow
-            index={index}
-            song={song}
-            showAlbum={!lessThanMd}
-            showDate={!lessThanLg}
-          />
-          )
-
-      }
+  const { onScroll, visibleChildren } = useVirtualRowDisplay({
+    children: useGenerateRows({
+      songs: likedSongs, showAlbum: !lessThanMd, showDate: !lessThanLg,
+      setObservedElement, hasMoreSongs, totalNumber
     }),
     rowHeight: 64,
-    skeletonRow: <VirtualSongRowSkeleton showAlbum={!lessThanMd} showDate={!lessThanLg} />,
+    skeletonRow: <SongRowSkeleton showAlbum={!lessThanMd} showDate={!lessThanLg} />,
   })
 
   useEffect(() => {
     getLikedSongs()
   }, [])
-
 
   return (
     <Stack
@@ -92,8 +73,14 @@ const LikedSongsPage = () => {
       sx={sx.stack}
       onScroll={onScroll}
     >
-      <LikedSongsLabel />
-      <TestSongDisplay hasMoreSongs={hasMoreSongs} songs={likedSongs} getSongs={getLikedSongs} totalNumber={totalNumber} visibleChildren={visibleChildren} />
+      <PlaylistLabel title="Liked Songs" numOfSongs={totalNumber} />
+      <PlaylistTable
+        hasMoreSongs={hasMoreSongs}
+        songs={likedSongs}
+        getSongs={getLikedSongs}
+        totalNumber={totalNumber}
+        visibleChildren={visibleChildren}
+      />
     </Stack>
   )
 }

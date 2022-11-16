@@ -11,7 +11,7 @@ const sx = {
   }
 }
 
-const VirtualSongRow = React.forwardRef((props, ref) => {
+const SongRow = React.forwardRef((props, ref) => {
   const { song, index, showAlbum, showDate } = props;
 
   return (
@@ -40,4 +40,4 @@ const VirtualSongRow = React.forwardRef((props, ref) => {
   )
 })
 
-export default VirtualSongRow
+export default SongRow
