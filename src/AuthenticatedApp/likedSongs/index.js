@@ -1,13 +1,13 @@
 import { useTheme } from "@emotion/react";
 import { Stack, useMediaQuery } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import PlaylistTable from "../../components/playlistTable";
+import PlaylistTable from "../../components/playlistSongTable";
 import useVirtualRowDisplay from "../../components/virtualisedRowDisplay/useVirtualRowDisplay";
-import SongRowSkeleton from "../../components/playlistTable/songRowSkeleton";
+import SongRowSkeleton from "../../components/playlistSongTable/songRowSkeleton";
 import useLikedSongs from "../../hooks/data/useLikedSongs";
 import { BODY_HEIGHT, BODY_WIDTH } from "../../styles/layout";
 import PlaylistLabel from "../../components/playlistLabel";
-import useGenerateRows from "../../components/playlistTable/useGenerateRows";
+import useGenerateRows from "../../components/playlistSongTable/useGenerateRows";
 
 const sx = {
   stack: {

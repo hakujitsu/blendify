@@ -1,4 +1,4 @@
-import { BODY_MARGIN, FOOTER_HEIGHT, HEADER_HEIGHT, PLAYLIST_TITLE_HEIGHT } from "../styles/layout";
+import { BODY_MARGIN, FOOTER_HEIGHT, HEADER_HEIGHT } from "../styles/layout";
 import useWindowDimensions from "./useWindowDimensions";
 
 const getNumericalValue = (height) => {
@@ -8,13 +8,8 @@ const getNumericalValue = (height) => {
 const usePlaylistTableHeight = () => {
   const { height: windowHeight } = useWindowDimensions()
 
-  const headerAndGapHeight = 50 + 12
-
   const playlistTableHeight = windowHeight - getNumericalValue(HEADER_HEIGHT)
-    - getNumericalValue(FOOTER_HEIGHT) - getNumericalValue(BODY_MARGIN)
-    - 50
-    // - getNumericalValue(PLAYLIST_TITLE_HEIGHT)
-  // - headerAndGapHeight
+    - getNumericalValue(FOOTER_HEIGHT) - getNumericalValue(BODY_MARGIN) - 50
 
   return { playlistTableHeight }
 }
