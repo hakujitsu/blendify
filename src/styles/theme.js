@@ -6,7 +6,7 @@ const darkTheme = createTheme({
     background: {
       default: "#190233",
       drawer: "#11022e",
-      border: "#2e2248",
+      border: "#36224d",
     },
     primary: {
       main: "#f0ced4",
@@ -23,6 +23,15 @@ const darkTheme = createTheme({
     //   primary: "#f2efed"
     // }
   },
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#20083b"
+        },
+      }
+    },
+  }
 });
 
 export default darkTheme;
