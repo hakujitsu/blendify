@@ -4,20 +4,23 @@ export const AuthContext = createContext(null);
 
 export const useAuthContextProvider = () => {
   const [userDetails, setUserDetails] = useState(null);
+  const [accessToken, setAccessToken] = useState(null)
 
   const isLoggedIn = () => {
     return userDetails !== null;
   };
 
-  const getAccessToken = () => {
-    if (isLoggedIn()) {
-      return userDetails.accessToken
-    }
-
-    return null
+  const setUserDetailsAndAccessToken = (details, token) => {
+    setUserDetails(details)
+    setAccessToken(token)
   }
 
-  return { userDetails, setUserDetails, isLoggedIn, getAccessToken };
+  const logOutCurrentUser = () => {
+    setUserDetails(null)
+    setAccessToken(null)
+  }
+
+  return { accessToken, userDetails, setUserDetailsAndAccessToken, logOutCurrentUser, isLoggedIn };
 };
 
 export const useAuthContext = () => {

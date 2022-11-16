@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getSongs } from '../../store/slices/likedSongs'
 
 const useLikedSongs = () => {
-  const { getAccessToken } = useAuthContext()
+  const { accessToken } = useAuthContext()
   const dispatch = useDispatch();
   const { songs, offset, totalNumber, hasMoreSongs } = useSelector((state) => state.likedSongs)
 
@@ -11,17 +11,16 @@ const useLikedSongs = () => {
     if (!hasMoreSongs) {
       return
     }
-    const access_token = getAccessToken()
     const currentOffset = offset;
 
-    if (access_token) {
+    if (accessToken) {
       const res = await fetch(`/api/data/getSavedTracks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          access_token,
+          access_token: accessToken,
           offset: currentOffset
         })
       });
