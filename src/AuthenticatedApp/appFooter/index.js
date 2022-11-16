@@ -1,9 +1,10 @@
 import { Box } from "@mui/material"
+import { FOOTER_HEIGHT } from "../../styles/layout";
 
 const sx = {
   footer: {
-    width: "100%",
-    height: "84px",
+    width: "100vw",
+    height: FOOTER_HEIGHT,
     backgroundColor: "background.drawer",
     borderTop: 1,
     borderColor: "background.border",

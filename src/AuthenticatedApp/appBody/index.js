@@ -1,12 +1,14 @@
 import { Box } from "@mui/material"
-import { createBrowserRouter, createRoutesFromElements, Navigate, Outlet, Route, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Navigate, Outlet, Route } from "react-router-dom";
+import { FOOTER_HEIGHT, HEADER_HEIGHT } from "../../styles/layout";
 import LikedSongsPage from "../likedSongs";
 import Playlists from "../playlists";
 
 const sx = {
   body: {
-    height: `calc(100vh - 84px - 64px)`,
+    height: `calc(100vh - ${HEADER_HEIGHT} -${FOOTER_HEIGHT})`,
     overflowY: "auto",
+    m: 4
   },
 }
 

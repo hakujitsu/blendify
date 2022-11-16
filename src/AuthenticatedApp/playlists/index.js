@@ -1,4 +1,12 @@
 import { useEffect, useState } from "react";
+import { BODY_HEIGHT } from "../../styles/layout";
+
+const sx = {
+  stack: {
+    maxHeight: BODY_HEIGHT,
+    maxWidth: "100%",
+  }
+}
 
 const Playlists = () => {
   const [list, setList] = useState([]);
@@ -18,12 +26,7 @@ const Playlists = () => {
   return (
     <>
       playlists
-      {list.map((item) => (
-        <div key={item.id}>
-          <h1>{item.name}</h1>
-          <img src={item.images[0]?.url} width="100" />
-        </div>
-      ))}
+      
     </>
   );
 }
