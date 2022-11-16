@@ -1,28 +1,37 @@
-import { Fab, Fade } from "@mui/material"
+import { Box, Fab, Fade } from "@mui/material"
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 const sx = {
   playButton: {
     position: "absolute",
-    bottom: "4px",
-    right: "4px",
+    bottom: "6px",
+    right: "6px",
     backgroundColor: "#cd5dde",
+    width: "48px",
+    height: "48px",
+    transition: "all .25s ease",
     "&:hover": {
       backgroundColor: "#cd5dde",
+      width: "54px",
+      height: "54px",
+      bottom: "3px",
+      right: "3px",
     }
   },
   playIcon: {
     color: "black",
-    fontSize: "1.8rem !important"
+    fontSize: "2rem !important"
   }
 }
 const PlayButton = (props) => {
   const { showPlayButton, title } = props;
   return (
     <Fade in={showPlayButton} timeout={450}>
-      <Fab variant="contained" aria-label={`play ${title} playlist`} size="large" sx={sx.playButton}>
-        <PlayArrowIcon sx={sx.playIcon} />
-      </Fab>
+      <Box>
+        <Fab variant="contained" aria-label={`play ${title} playlist`} size="large" sx={sx.playButton}>
+          <PlayArrowIcon sx={sx.playIcon} />
+        </Fab>
+      </Box>
     </Fade>
   )
 }
