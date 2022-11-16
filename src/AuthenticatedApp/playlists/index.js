@@ -1,32 +1,38 @@
+import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
-import { BODY_HEIGHT } from "../../styles/layout";
+import usePlaylists from "../../hooks/data/usePlaylists";
+import { BODY_HEIGHT, BODY_WIDTH } from "../../styles/layout";
+import PlaylistsHeader from "./header";
+import PlaylistGrid from "./playlistGrid";
 
 const sx = {
   stack: {
     maxHeight: BODY_HEIGHT,
-    maxWidth: "100%",
+    maxWidth: BODY_WIDTH,
+    overflowY: "auto"
   }
 }
 
 const Playlists = () => {
   const [list, setList] = useState([]);
-
-  const getMyPlaylists = async () => {
-    // const res = await fetch('/api/playlists');
-    // const { items } = await res.json();
-    setList([]);
-  };
+  const { totalNumber, hasMorePlaylists, playlists, fetchPlaylists } = usePlaylists();
 
   useEffect(() => {
-    getMyPlaylists()
+    fetchPlaylists()
   }, [])
 
 
   return (
-    <>
-      playlists
-      
-    </>
+    <Stack
+      direction="column"
+      justifyContent="flex-start"
+      alignItems="stretch"
+      spacing={2}
+      sx={sx.stack}
+    >
+      <PlaylistsHeader/>
+      <PlaylistGrid playlists={playlists}/>
+    </Stack>
   );
 }
 

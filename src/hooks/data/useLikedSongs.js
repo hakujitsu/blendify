@@ -1,11 +1,15 @@
 import { useAuthContext } from "../auth/useAuthContext"
 import { useSelector, useDispatch } from 'react-redux'
 import { getSongs } from '../../store/slices/likedSongs'
+import useAuth from "../auth/useAuth"
 
 const useLikedSongs = () => {
   const { accessToken } = useAuthContext()
+  const { getRefreshToken } = useAuth()
   const dispatch = useDispatch();
   const { songs, offset, totalNumber, hasMoreSongs } = useSelector((state) => state.likedSongs)
+
+  const refreshToken = getRefreshToken();
 
   const getLikedSongs = async () => {
     if (!hasMoreSongs) {
@@ -21,6 +25,7 @@ const useLikedSongs = () => {
         },
         body: JSON.stringify({
           access_token: accessToken,
+          refresh_token: refreshToken,
           offset: currentOffset
         })
       });

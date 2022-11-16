@@ -60,7 +60,7 @@ const useAuth = () => {
     return localStorage.getItem(REFRESH_TOKEN);
   }
 
-  return { authenticateWithCode, authenticateWithToken, logOut }
+  return { authenticateWithCode, authenticateWithToken, logOut, getRefreshToken }
 }
 
 export default useAuth;

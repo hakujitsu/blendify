@@ -14,9 +14,9 @@ export const playlistsSlice = createSlice({
     getPlaylists: (state, action) => {
       const { totalNumber, offset, playlistsToAdd } = action.payload;
       if (state.offset === offset) {
-        state.hasMorePlaylists = (totalNumber - state.songs.length - playlistsToAdd.length) > 0
+        state.hasMorePlaylists = (totalNumber - state.playlists.length - playlistsToAdd.length) > 0
         state.offset += 1
-        state.playlists = state.songs.concat(playlistsToAdd)
+        state.playlists = state.playlists.concat(playlistsToAdd)
         state.totalNumber = totalNumber
       }
     },
