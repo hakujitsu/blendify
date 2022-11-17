@@ -30,9 +30,12 @@ const useLikedSongs = () => {
         })
       });
       const { data, total, access_token } = await res.json();
-      const songsToAdd = data.map(d => d.tracks.liked = true)
+      data.forEach(function (song) {
+        song.track.liked = true;
+      });
+
       updateAccessToken(access_token)
-      dispatch(getSongs({ totalNumber: total, offset: currentOffset, songsToAdd }))
+      dispatch(getSongs({ totalNumber: total, offset: currentOffset, songsToAdd: data }))
     }
   };
 
