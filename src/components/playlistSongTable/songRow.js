@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { convertMsToSongDuration, getDateAddedString } from "../../util/datetime";
 import RowLayout from "./rowLayout";
 import SongTitleBox from "./songTitleCell";
@@ -27,7 +28,9 @@ const SongRow = React.forwardRef((props, ref) => {
         }
         albumContent={<Typography variant="body2" noWrap>{song?.track?.album.name}</Typography>}
         dateContent={<Typography variant="body2" noWrap>{getDateAddedString(song?.added_at)}</Typography>}
-        likedContent={<FavoriteIcon fontSize="small" />}
+        likedContent={
+          song?.track.liked ? <FavoriteIcon fontSize="small" /> : <FavoriteBorderIcon fontSize="small" />
+        }
         durationContent={
           <Typography variant="body2" noWrap align="right" sx={sx.durationText}>
             {convertMsToSongDuration(song?.track.duration_ms)}

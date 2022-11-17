@@ -13,7 +13,7 @@ const sx = {
 }
 
 const PlaylistTable = (props) => {
-  const { hasMoreSongs, getSongs, songs, totalNumber, visibleChildren } = props
+  const { totalNumber, visibleChildren } = props
   const theme = useTheme();
   const lessThanLg = useMediaQuery(theme.breakpoints.down('lg'));
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'));
