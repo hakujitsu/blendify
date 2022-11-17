@@ -9,6 +9,7 @@ import SongRowSkeleton from "../../components/playlistSongTable/songRowSkeleton"
 import useGenerateRows from "../../components/playlistSongTable/useGenerateRows";
 import useVirtualRowDisplay from "../../components/virtualisedRowDisplay/useVirtualRowDisplay";
 import usePlaylist from "../../hooks/data/usePlaylist";
+import playlists from "../../store/slices/playlists";
 import { BODY_HEIGHT, BODY_WIDTH } from "../../styles/layout";
 
 const sx = {
@@ -25,8 +26,6 @@ const PlaylistPage = () => {
   const theme = useTheme();
   const lessThanLg = useMediaQuery(theme.breakpoints.down('lg'));
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'));
-
-  console.log(playlist?.tracks)
 
   const [observedElement, setObservedElement] = useState(null)
 
@@ -63,7 +62,6 @@ const PlaylistPage = () => {
     skeletonRow: <SongRowSkeleton showAlbum={!lessThanMd} showDate={!lessThanLg} />,
   })
 
-
   useEffect(() => {
     fetchPlaylistTracks()
   })
@@ -77,7 +75,14 @@ const PlaylistPage = () => {
       sx={sx.stack}
       onScroll={onScroll}
     >
-      <PlaylistLabel title={playlist.title} numOfSongs={playlist.totalSongs} />
+      <PlaylistLabel
+        title={playlist.title}
+        numOfSongs={playlist.totalSongs}
+        img={playlist.images.length > 0
+          ? (playlist.images.length === 1 ? playlist.images[0].url : playlist.images.at(-2).url)
+          : ""
+        }
+      />
       <PlaylistTable
         hasMoreSongs={playlist.hasMoreSongs}
         songs={playlist.tracks}

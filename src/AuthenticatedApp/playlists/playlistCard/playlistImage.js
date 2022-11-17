@@ -1,6 +1,6 @@
-import { Box, Card, CardMedia, Paper } from "@mui/material"
-import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
+import { Box, Card, CardMedia } from "@mui/material"
 import PlayButton from "./playButton";
+import IconPlaceholder from "./iconPlaceholder";
 
 const sx = {
   box: {
@@ -55,9 +55,7 @@ const PlaylistImage = (props) => {
             alt={title + " image"}
             sx={sx.cardImage}
           /> :
-          <Paper sx={[sx.cardImage, sx.placeholder]}>
-            <LibraryMusicIcon sx={sx.placeholderIcon} />
-          </Paper>
+          <IconPlaceholder/>
         }
         <PlayButton showPlayButton={showPlayButton} title={title} />
       </Card>

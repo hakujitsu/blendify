@@ -23,12 +23,18 @@ const sx = {
     fontSize: "2rem !important"
   }
 }
+
 const PlayButton = (props) => {
   const { showPlayButton, title } = props;
+
+  const onClick = (e) => {
+    e.stopPropagation()
+  }
+
   return (
     <Fade in={showPlayButton} timeout={450}>
       <Box>
-        <Fab variant="contained" aria-label={`play ${title} playlist`} size="large" sx={sx.playButton}>
+        <Fab variant="contained" aria-label={`play ${title} playlist`} size="large" sx={sx.playButton} onClick={onClick}>
           <PlayArrowIcon sx={sx.playIcon} />
         </Fab>
       </Box>
