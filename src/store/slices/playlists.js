@@ -20,10 +20,23 @@ export const playlistsSlice = createSlice({
         state.totalNumber = totalNumber
       }
     },
+    addPlaylistTracks: (state, action) => {
+      const { id, tracks, offset } = action.payload;
+      let playlist = state.playlists.find(p => p.id === id)
+      if (!playlist) {
+        return
+      }
+
+      if (playlist.offset === offset) {
+        playlist.hasMoreSongs = (playlist.totalSongs - playlist.tracks.length - tracks.length) > 0
+        playlist.offset += 1
+        playlist.tracks = playlist.tracks.concat(tracks)
+      }
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { getPlaylists } = playlistsSlice.actions
+export const { getPlaylists, addPlaylistTracks } = playlistsSlice.actions
 
 export default playlistsSlice.reducer

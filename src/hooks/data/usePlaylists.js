@@ -4,7 +4,7 @@ import { getPlaylists } from "../../store/slices/playlists";
 import useAuth from "../auth/useAuth"
 
 const usePlaylists = () => {
-  const { accessToken } = useAuthContext()
+  const { accessToken, updateAccessToken } = useAuthContext()
   const { getRefreshToken } = useAuth()
   const dispatch = useDispatch();
   const { playlists, offset, totalNumber, hasMorePlaylists } = useSelector((state) => state.playlists)
@@ -12,9 +12,7 @@ const usePlaylists = () => {
   const refreshToken = getRefreshToken();
 
   const fetchPlaylists = async () => {
-    console.log('hi')
     if (!hasMorePlaylists) {
-      console.log('no more')
       return
     }
     const currentOffset = offset;
@@ -31,10 +29,21 @@ const usePlaylists = () => {
           offset: currentOffset
         })
       });
-      const { data, total } = await res.json();
+      const { data, total, access_token } = await res.json();
+      updateAccessToken(access_token)
       const playlistsToAdd = data.map(p => {
         const { id, name, description, images, owner, tracks } = p
-        return { id, title: name, description, images, owner, totalSongs: tracks.total }
+        return {
+          id,
+          title: name,
+          description,
+          images,
+          owner,
+          totalSongs: tracks.total,
+          tracks: [],
+          hasMoreSongs: tracks.total > 0,
+          offset: 0
+        }
       })
       dispatch(getPlaylists({ totalNumber: total, offset: currentOffset, playlistsToAdd }))
     }

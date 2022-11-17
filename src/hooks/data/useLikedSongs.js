@@ -4,7 +4,7 @@ import { getSongs } from '../../store/slices/likedSongs'
 import useAuth from "../auth/useAuth"
 
 const useLikedSongs = () => {
-  const { accessToken } = useAuthContext()
+  const { accessToken, updateAccessToken } = useAuthContext()
   const { getRefreshToken } = useAuth()
   const dispatch = useDispatch();
   const { songs, offset, totalNumber, hasMoreSongs } = useSelector((state) => state.likedSongs)
@@ -29,7 +29,8 @@ const useLikedSongs = () => {
           offset: currentOffset
         })
       });
-      const { data, total } = await res.json();
+      const { data, total, access_token } = await res.json();
+      updateAccessToken(access_token)
       dispatch(getSongs({ totalNumber: total, offset: currentOffset, songsToAdd: data }))
     }
   };

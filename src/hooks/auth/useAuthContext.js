@@ -20,7 +20,13 @@ export const useAuthContextProvider = () => {
     setAccessToken(null)
   }
 
-  return { accessToken, userDetails, setUserDetailsAndAccessToken, logOutCurrentUser, isLoggedIn };
+  const updateAccessToken = (newToken) => {
+    if (accessToken !== newToken) {
+      setAccessToken(newToken)
+    }
+  }
+
+  return { accessToken, userDetails, setUserDetailsAndAccessToken, updateAccessToken, logOutCurrentUser, isLoggedIn };
 };
 
 export const useAuthContext = () => {

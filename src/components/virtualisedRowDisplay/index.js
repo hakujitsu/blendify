@@ -1,5 +1,6 @@
 const VirtualWindow = (props) => {
   const { visibleChildren, numberOfItems } = props
+  console.log(numberOfItems)
 
   return (
     <div

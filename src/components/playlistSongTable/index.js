@@ -22,7 +22,7 @@ const PlaylistTable = (props) => {
     <Box style={sx.table}>
       <SongHeader showAlbum={!lessThanMd} showDate={!lessThanLg} />
       <Box sx={sx.spacerRow} />
-      <VirtualWindow visibleChildren={visibleChildren} numberOfItems={songs.length} />
+      <VirtualWindow visibleChildren={visibleChildren} numberOfItems={totalNumber} />
     </Box>
   );
 }

@@ -20,7 +20,7 @@ const darkTheme = createTheme({
       border: "#36224d",
     },
     primary: {
-      main: "#f0ced4",
+      main: "#cd5dde",
     },
     secondary: {
       main: "#19c0e7",

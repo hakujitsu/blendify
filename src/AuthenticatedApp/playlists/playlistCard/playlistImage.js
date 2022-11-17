@@ -32,9 +32,9 @@ const sx = {
     position: "absolute",
     bottom: "4px",
     right: "4px",
-    backgroundColor: "#cd5dde",
+    backgroundColor: "primary.main",
     "&:hover": {
-      backgroundColor: "#cd5dde",
+      backgroundColor: "primary.main",
     }
   },
   playIcon: {

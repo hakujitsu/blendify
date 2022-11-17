@@ -31,7 +31,7 @@ const Playlists = () => {
       sx={sx.stack}
     >
       <PlaylistsHeader/>
-      <PlaylistGrid playlists={playlists}/>
+      <PlaylistGrid playlists={playlists} hasMorePlaylists={hasMorePlaylists} fetchPlaylists={fetchPlaylists}/>
     </Stack>
   );
 }
