@@ -6,6 +6,7 @@ import { convertMsToSongDuration, getDateAddedString } from "../../util/datetime
 import RowLayout from "./rowLayout";
 import SongTitleBox from "./songTitleCell";
 import React, { useState } from "react";
+import usePlayback from "../../hooks/usePlayback";
 
 const sx = {
   durationText: {
@@ -23,6 +24,7 @@ const sx = {
 const SongRow = React.forwardRef((props, ref) => {
   const { song, index, showAlbum, showDate } = props;
   const [showPlayButton, setShowPlayButton] = useState(false)
+  const { playSong } = usePlayback()
 
   return (
     <div
@@ -34,7 +36,7 @@ const SongRow = React.forwardRef((props, ref) => {
         indexContent={
           showPlayButton ?
             <Box sx={sx.playButton}>
-              <PlayArrowIcon />
+              <PlayArrowIcon onClick={() => playSong(song.track.uri)} />
             </Box> :
             <Typography noWrap align="right">
               {index + 1}

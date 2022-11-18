@@ -1,26 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  player: null,
   deviceId: null,
-
+  isPlaying: false,
 }
 
 export const webPlaybackSlice = createSlice({
   name: 'webPlayback',
   initialState,
   reducers: {
-    setPlayer: (state, action) => {
-      console.log(action.payload)
-      state.player = action.payload;
-    },
     setDeviceId: (state, action) => {
       state.deviceId = action.payload;
+    },
+    setIsPlaying: (state, action) => {
+      state.isPlaying = action.payload
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setDeviceId, setPlayer } = webPlaybackSlice.actions
+export const { setDeviceId, setIsPlaying } = webPlaybackSlice.actions
 
 export default webPlaybackSlice.reducer

@@ -31,15 +31,6 @@ const unauthenticatedRouter = createBrowserRouter(
   )
 );
 
-const authenticatedRouter = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/">
-      <Route path="/" element={<AuthenticatedApp />} />
-      <Route path="/*" element={<Navigate to="/" replace />} />
-    </Route>
-  )
-);
-
 const playerRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<AuthenticatedApp />}>
@@ -59,7 +50,6 @@ function App() {
   return (
     <>
       {isLoggedIn() ? (
-        // <AuthenticatedApp />
         <RouterProvider router={playerRouter} />
       ) : (
         <RouterProvider router={unauthenticatedRouter} />

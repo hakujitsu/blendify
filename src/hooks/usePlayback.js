@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux"
 import { callPauseSong, callPlaySongs, callResumeSong } from "../util/playback"
+import { usePlayerContext } from "./player/usePlayerContext"
 
 /**
  * Functions to do:
@@ -12,16 +13,14 @@ import { callPauseSong, callPlaySongs, callResumeSong } from "../util/playback"
  */
 
 const usePlayback = () => {
-  const { deviceId, player } = useSelector((state) => state.webPlayback)
+  const { player } = usePlayerContext()
+  const { deviceId } = useSelector((state) => state.webPlayback)
 
-  // TODO: add spotify uri as argument
-  const playSong = () => {
-    console.log(player)
-    console.log(deviceId)
+  const playSong = (uri) => {
     callPlaySongs({
       device_id: deviceId,
       playerInstance: player,
-      spotify_uris: ["spotify:track:2cy5F36NoF5DihBkx0S3G7"],
+      spotify_uris: [uri],
     });
   }
 

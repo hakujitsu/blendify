@@ -16,7 +16,7 @@ const sx = {
   }
 }
 
-const PlaybackButtons = (props) => {
+const PlaybackButtons = () => {
   const [isPlaying, setIsPlaying] = useState(false)
   const { playSong, pauseSong, resumeSong } = usePlayback();
 
@@ -39,7 +39,7 @@ const PlaybackButtons = (props) => {
     >
       <IconButton
         size="small"
-        onClick={playSong}
+        // onClick={playSong}
       >
         <SkipPreviousIcon />
       </IconButton>
