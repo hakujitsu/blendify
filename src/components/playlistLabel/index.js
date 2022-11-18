@@ -10,7 +10,7 @@ const sx = {
 }
 
 const PlaylistLabel = (props) => {
-  const { title, numOfSongs, img = "" } = props
+  const { title, numOfSongs, img = "", likedSongs = false } = props
 
   return (
     <Box>
@@ -20,7 +20,7 @@ const PlaylistLabel = (props) => {
         alignItems="center"
         spacing={0} sx={sx.container}
       >
-        <PlaylistImage img={img} />
+        <PlaylistImage img={img} likedSongs={likedSongs}/>
         <PlaylistTitleLabel title={title} numOfSongs={numOfSongs} />
       </Stack>
     </Box>

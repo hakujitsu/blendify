@@ -1,34 +1,40 @@
-import { Paper } from "@mui/material"
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Box, Card, CardMedia, } from "@mui/material"
+import IconPlaceholder from "../../AuthenticatedApp/playlists/playlistCard/iconPlaceholder";
+import LikedSongsIcon from "../../AuthenticatedApp/likedSongs/likedSongsIcon";
 
 const sx = {
-  background: {
-    background: `linear-gradient(61deg, rgba(29,44,118,1) 0%, rgba(68,1,91,1) 56%, rgba(101,12,49,2) 100%)`
-  },
-  icon: {
-    fontSize: "60px",
-  },
-  paper: {
-    height: "128px",
-    width: "128px",
+  container: {
+    minHeight: "128px",
+    minWidth: "128px",
     mr: 4,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    verticalAlign: "middle",
   },
 }
 const PlaylistImage = (props) => {
-  const { img } = props;
+  const { img, likedSongs } = props;
 
   if (img) {
-    return (<></>)
+    return (
+      <Card elevation={3} sx={sx.container}>
+        <CardMedia
+          height="128px"
+          width="128px"
+          component="img"
+          image={img}
+          sx={sx.cardImage}
+        />
+      </Card>
+    )
+  } else if (likedSongs) {
+    return (
+      <Box sx={sx.container}>
+        <LikedSongsIcon />
+      </Box>
+    )
   } else {
     return (
-      <Paper elevation={3} sx={sx.paper} style={sx.background}>
-        <FavoriteIcon sx={sx.icon} />
-      </Paper>
+      <Box sx={sx.container}>
+        <IconPlaceholder />
+      </Box>
     )
   }
 }

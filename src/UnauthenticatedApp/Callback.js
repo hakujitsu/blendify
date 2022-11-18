@@ -7,7 +7,7 @@ import LoadingScreen from "./LoadingScreen";
 const Callback = () => {
   const effectCalled = useRef(false);
   const { userDetails } = useAuthContext();
-  const {authenticateWithCode} = useAuth();
+  const { authenticateWithCode } = useAuth();
   const navigate = useNavigate();
 
   const authenticate = async (code) => {

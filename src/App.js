@@ -19,6 +19,7 @@ import darkTheme from "./styles/theme"
 import './App.css';
 import Playlists from "./AuthenticatedApp/playlists";
 import LikedSongsPage from "./AuthenticatedApp/likedSongs";
+import PlaylistPage from "./AuthenticatedApp/playlist";
 
 const unauthenticatedRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -44,6 +45,7 @@ const playerRouter = createBrowserRouter(
     <Route path="/" element={<AuthenticatedApp />}>
       <Route path="/" element={<Playlists />} index />
       <Route path="playlists" element={<Playlists />} />
+      <Route path="playlist/:playlistId" element={<PlaylistPage />} />
       <Route path="liked-songs" element={<LikedSongsPage />} />
       <Route path="/callback" element={<Navigate to="/" replace />} />
     </Route>

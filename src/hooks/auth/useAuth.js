@@ -5,7 +5,7 @@ const PREFIX = "BLENDIFY/";
 const REFRESH_TOKEN = `${PREFIX}REFRESH_TOKEN`;
 
 const useAuth = () => {
-  const { setUserDetails } = useAuthContext();
+  const { logOutCurrentUser, setUserDetailsAndAccessToken } = useAuthContext();
 
   const authenticateWithCode = async (code) => {
     const res = await fetch(`/api/auth/callback/?code=${code}`, {
@@ -17,13 +17,11 @@ const useAuth = () => {
     const data = await res.json();
     const { access_token, refresh_token, display_name, image, uri } = data;
     saveRefreshToken(refresh_token)
-    setUserDetails({
+    setUserDetailsAndAccessToken({
       username: display_name,
       img: image,
       uri: uri,
-      accessToken: access_token,
-      refreshToken: refresh_token,
-    });
+    }, access_token);
   };
 
   const authenticateWithToken = async () => {
@@ -41,19 +39,17 @@ const useAuth = () => {
       });
       const data = await res.json();
       const { access_token, display_name, image, uri } = data;
-      setUserDetails({
+      setUserDetailsAndAccessToken({
         username: display_name,
         img: image,
         uri: uri,
-        accessToken: access_token,
-        refreshToken: refresh_token,
-      });
+      }, access_token);
     }
   };
 
   const logOut = () => {
     localStorage.removeItem(REFRESH_TOKEN)
-    setUserDetails(null)
+    logOutCurrentUser()
   }
 
   const saveRefreshToken = (token) => {
@@ -64,7 +60,7 @@ const useAuth = () => {
     return localStorage.getItem(REFRESH_TOKEN);
   }
 
-  return { authenticateWithCode, authenticateWithToken, logOut }
+  return { authenticateWithCode, authenticateWithToken, logOut, getRefreshToken }
 }
 
 export default useAuth;
