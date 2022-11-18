@@ -1,4 +1,5 @@
 import { Box } from "@mui/material"
+import WebPlayback from "../../components/webPlayback";
 import { FOOTER_HEIGHT } from "../../styles/layout";
 
 const sx = {
@@ -15,7 +16,7 @@ const sx = {
 const AppFooter = () => {
   return (
     <Box sx={sx.footer} >
-      footer
+      <WebPlayback />
     </Box>
   )
 }
