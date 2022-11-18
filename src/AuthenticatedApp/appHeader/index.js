@@ -1,5 +1,6 @@
 import { Box, Stack } from "@mui/material";
 import { HEADER_HEIGHT } from "../../styles/layout";
+import NavigationButtons from "./navigationButtons";
 import UserBadge from "./userBadge";
 
 const sx = {
@@ -27,7 +28,7 @@ const AppHeader = () => {
         spacing={2}
         sx={sx.stack}
       >
-        <Box />
+        <NavigationButtons />
         <UserBadge />
       </Stack>
     </Box>

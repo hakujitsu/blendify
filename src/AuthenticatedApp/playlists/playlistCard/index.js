@@ -1,6 +1,6 @@
 import { Card, CardActionArea, CardContent } from "@mui/material"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import useHistory from "../../../hooks/useHistory"
 import PlaylistDesc from "./playlistDesc"
 import PlaylistImage from "./playlistImage"
 
@@ -22,10 +22,10 @@ const sx = {
 const PlaylistCard = (props) => {
   const { playlist } = props
   const [showPlayButton, setShowPlayButton] = useState(false)
-  const navigate = useNavigate()
+  const { navigateTo } = useHistory()
 
   const navigateToPlaylist = () => {
-    navigate("/playlist/" + playlist.id)
+    navigateTo("/playlist/" + playlist.id)
   }
 
   return (

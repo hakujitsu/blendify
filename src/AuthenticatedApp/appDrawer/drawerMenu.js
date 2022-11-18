@@ -5,6 +5,7 @@ import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import AlbumIcon from '@mui/icons-material/Album';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { useNavigate } from "react-router-dom";
+import useHistory from "../../hooks/useHistory";
 
 
 const sx = {
@@ -44,13 +45,13 @@ const MENU_ITEMS = [
 ]
 
 const DrawerMenu = () => {
-  const navigate = useNavigate();
+  const { navigateTo } = useHistory();
 
   return (
     <MenuList sx={{ width: '100%' }}>
       {MENU_ITEMS.map(item => (
         <MenuItem key={item.text} sx={sx.menuItem}
-          onClick={() => navigate(item.route)}
+          onClick={() => navigateTo(item.route)}
         >
           <ListItemIcon>
             {item.icon}

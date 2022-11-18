@@ -31,8 +31,6 @@ const PlaylistPage = () => {
 
   const observer = useRef(new IntersectionObserver(fetchPlaylistTracks));
 
-  console.log(playlist.tracks)
-
   useEffect(() => {
     if (!(observedElement && observer)) {
       return
