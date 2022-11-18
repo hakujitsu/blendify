@@ -6,6 +6,7 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 
 const sx = {
   playPauseButton: {
+    transform: 'scale(0.9)',
     boxShadow: 0,
     '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
       boxShadow: 0,
@@ -20,13 +21,13 @@ const PlaybackButtons = () => {
         alignItems="center"
         spacing={1}
       >
-        <IconButton>
+        <IconButton size="small" >
           <SkipPreviousIcon />
         </IconButton>
         <Fab size="small" disableRipple sx={sx.playPauseButton}>
           <PlayArrowIcon />
         </Fab>
-        <IconButton>
+        <IconButton size="small" >
           <SkipNextIcon />
         </IconButton>
       </Stack>

@@ -14,7 +14,7 @@ const PlaybackDetails = () => {
       direction="column"
       justifyContent="center"
       alignItems="center"
-      spacing={0.5}
+      spacing={0.25}
       sx={sx.container}
     >
       <PlaybackButtons />
