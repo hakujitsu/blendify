@@ -1,7 +1,9 @@
 import { Box, Stack } from '@mui/material';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useAuthContext } from '../../hooks/auth/useAuthContext';
-import { FOOTER_HEIGHT, MIN_WIDTH } from '../../styles/layout';
+import { setDeviceId, setPlayer } from '../../store/slices/webPlayback';
+import { MIN_WIDTH } from '../../styles/layout';
 import PlaybackDetails from './playbackDetails';
 import SongDetails from './songDetails';
 import VolumeSlider from './volumeSlider';
@@ -16,65 +18,51 @@ const sx = {
   }
 }
 
-const track = {
-  name: "",
-  album: {
-    images: [
-      { url: "" }
-    ]
-  },
-  artists: [
-    { name: "" }
-  ]
-}
-
 const WebPlayback = () => {
   const { accessToken } = useAuthContext();
-  const [player, setPlayer] = useState(undefined);
-  const [isPaused, setPaused] = useState(false);
-  const [isActive, setActive] = useState(false);
-  const [currentTrack, setTrack] = useState(track);
+  // const [isPaused, setPaused] = useState(false);
+  // const [isActive, setActive] = useState(false);
+  // const [currentTrack, setTrack] = useState(track);
 
-  // useEffect(() => {
-  //   const script = document.createElement("script");
-  //   script.src = "https://sdk.scdn.co/spotify-player.js";
-  //   script.async = true;
+  const dispatch = useDispatch()
 
-  //   document.body.appendChild(script);
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://sdk.scdn.co/spotify-player.js";
+    script.async = true;
 
-  //   window.onSpotifyWebPlaybackSDKReady = () => {
-  //     const player = new window.Spotify.Player({
-  //       name: 'Web Playback SDK',
-  //       getOAuthToken: cb => { cb(accessToken); },
-  //       volume: 0.5
-  //     });
+    document.body.appendChild(script);
 
-  //     setPlayer(player);
+    window.onSpotifyWebPlaybackSDKReady = () => {
+      const player = new window.Spotify.Player({
+        name: 'blendify',
+        getOAuthToken: cb => { cb(accessToken); },
+        volume: 0.5
+      });
 
-  //     player.addListener('ready', ({ device_id }) => {
-  //       console.log('Ready with Device ID', device_id);
-  //     });
+      dispatch(setPlayer(player));
 
-  //     player.addListener('not_ready', ({ device_id }) => {
-  //       console.log('Device ID has gone offline', device_id);
-  //     });
+      player.addListener('ready', ({ device_id }) => {
+        dispatch(setDeviceId(device_id))
+        console.log('Ready with Device ID', device_id);
+      });
 
-  //     player.addListener('player_state_changed', (state => {
-  //       if (!state) {
-  //         return;
-  //       }
+      player.addListener('not_ready', ({ device_id }) => {
+        console.log('Device ID has gone offline', device_id);
+      });
 
-  //       setTrack(state.track_window.current_track);
-  //       setPaused(state.paused);
+      player.addListener('player_state_changed', (state => {
+        console.log(state)
+        if (!state) {
+          return;
+        }
+      }));
 
-  //       player.getCurrentState().then(state => {
-  //         (!state) ? setActive(false) : setActive(true)
-  //       });
-  //     }));
+      player.connect();
+    };
+  }, []);
 
-  //     player.connect();
-  //   };
-  // }, []);
+  
 
   return (
     <Stack

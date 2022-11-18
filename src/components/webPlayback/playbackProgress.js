@@ -13,6 +13,7 @@ const sx = {
         boxShadow: 'inherit',
       },
     },
+    flexGrow: 1
   },
 }
 
@@ -41,7 +42,6 @@ const PlaybackProgress = () => {
         value={progress}
         onChange={handleChange}
         sx={sx.slider}
-        flexGrow={1}
       />
       <Typography variant="caption">
         2:28

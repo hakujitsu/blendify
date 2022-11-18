@@ -32,13 +32,14 @@ const usePlaylists = () => {
       const { data, total, access_token } = await res.json();
       updateAccessToken(access_token)
       const playlistsToAdd = data.map(p => {
-        const { id, name, description, images, owner, tracks } = p
+        const { id, name, description, images, owner, tracks, uri } = p
         return {
           id,
           title: name,
           description,
           images,
           owner,
+          uri,
           totalSongs: tracks.total,
           tracks: [],
           hasMoreSongs: tracks.total > 0,

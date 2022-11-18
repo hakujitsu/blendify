@@ -1,4 +1,4 @@
-import {Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import PlaybackButtons from "./playbackButtons";
 import PlaybackProgress from "./playbackProgress";
 
@@ -8,7 +8,7 @@ const sx = {
   }
 }
 
-const PlaybackDetails = () => {
+const PlaybackDetails = (props) => {
   return (
     <Stack
       direction="column"
