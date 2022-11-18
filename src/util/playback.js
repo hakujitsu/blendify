@@ -58,6 +58,25 @@ export const callPauseSong = ({
   });
 };
 
+export const callToggleVolume = ({
+  volume,
+  device_id,
+  playerInstance: {
+    _options: {
+      getOAuthToken
+    }
+  }
+}) => {
+  getOAuthToken(access_token => {
+    fetch(`https://api.spotify.com/v1/me/player/volume?device_id=${device_id}&volume_percent=${volume}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`
+      },
+    });
+  });
+};
 
 // Use this at later date
 export const callPlayContext = ({

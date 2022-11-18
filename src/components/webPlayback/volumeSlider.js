@@ -1,7 +1,9 @@
 import VolumeDownIcon from '@mui/icons-material/VolumeDown';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import { Slider, Stack } from '@mui/material';
-import { useState } from 'react';
+import _ from 'lodash';
+import { useCallback, useState } from 'react';
+import usePlayback from '../../hooks/usePlayback';
 
 const sx = {
   slider: {
@@ -16,10 +18,16 @@ const sx = {
 }
 
 const VolumeSlider = () => {
-  const [volume, setVolume] = useState(100);
+  const [volume, setVolume] = useState(50);
+  const { toggleVolume } = usePlayback()
+
+  const setSpotifyVolume = useCallback(_.debounce((newValue) => {
+    toggleVolume(newValue)
+  }, 500), [volume, toggleVolume])
 
   const handleChange = (event, newValue) => {
     setVolume(newValue);
+    setSpotifyVolume(newValue)
   };
 
   return (
@@ -33,6 +41,8 @@ const VolumeSlider = () => {
       <Slider
         size="small"
         aria-label="Volume"
+        min={0}
+        max={100}
         value={volume}
         onChange={handleChange}
         sx={sx.slider}

@@ -5,6 +5,7 @@ import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import usePlayback from "../../hooks/usePlayback";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const sx = {
   playPauseButton: {
@@ -17,13 +18,11 @@ const sx = {
 }
 
 const PlaybackButtons = () => {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const { playSong, pauseSong, resumeSong } = usePlayback();
+  const { isPlaying } = useSelector((state) => state.webPlayback)
+  const { pauseSong, resumeSong } = usePlayback();
 
   const togglePlay = () => {
-    const currentState = isPlaying
-    setIsPlaying(!currentState)
-    if (currentState) {
+    if (isPlaying) {
       pauseSong()
     } else {
       resumeSong()
@@ -49,7 +48,7 @@ const PlaybackButtons = () => {
         onClick={togglePlay}
         sx={sx.playPauseButton}
       >
-        <PlayArrowIcon />
+        {isPlaying ? <PauseIcon/> : <PlayArrowIcon />}
       </Fab>
       <IconButton
         size="small"

@@ -36,7 +36,7 @@ const SongRow = React.forwardRef((props, ref) => {
         indexContent={
           showPlayButton ?
             <Box sx={sx.playButton}>
-              <PlayArrowIcon onClick={() => playSong(song.track.uri)} />
+              <PlayArrowIcon onClick={() => playSong(song.track.uri, song)} />
             </Box> :
             <Typography noWrap align="right">
               {index + 1}

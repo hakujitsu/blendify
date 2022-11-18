@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setDeviceId } from "../../store/slices/webPlayback";
 import { useAuthContext } from "../auth/useAuthContext";
 
-export const PlayerContext = createContext({ player: null, setPlayer: null });
+export const PlayerContext = createContext(null);
 
 export const usePlayerContextProvider = () => {
   const [spotifyPlayer, setSpotifyPlayer] = useState(null);
