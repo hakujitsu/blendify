@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setDeviceId } from "../../store/slices/webPlayback";
+import { setDeviceId, setIsPlaying, setProgress } from "../../store/slices/webPlayback";
 import { useAuthContext } from "../auth/useAuthContext";
 
 export const PlayerContext = createContext(null);
@@ -40,6 +40,10 @@ export const usePlayerContextProvider = () => {
         console.log(state)
         if (!state) {
           return;
+        } else if (state.position) {
+          console.log(state.position)
+          dispatch(setIsPlaying(!state.paused))
+          dispatch(setProgress(state.position))
         }
       }));
 

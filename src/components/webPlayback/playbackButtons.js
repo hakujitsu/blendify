@@ -4,7 +4,6 @@ import PauseIcon from '@mui/icons-material/Pause';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import usePlayback from "../../hooks/usePlayback";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const sx = {

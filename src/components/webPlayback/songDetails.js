@@ -4,9 +4,13 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useSelector } from "react-redux"
 import MusicOffIcon from '@mui/icons-material/MusicOff';
 
+// TODO: fix overflow bug
+
 const sx = {
   container: {
-    height: "100%"
+    height: "100%",
+    width: "30%",
+    maxWidth: "30%",
   },
   placeholderBox: {
     height: "56px",
@@ -20,8 +24,6 @@ const sx = {
 
 const SongDetails = () => {
   const { currentSong } = useSelector((state) => state.webPlayback)
-
-  console.log(currentSong)
 
   if (!currentSong) {
     return (

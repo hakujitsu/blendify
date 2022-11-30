@@ -8,7 +8,7 @@ const sx = {
   }
 }
 
-const PlaybackDetails = (props) => {
+const PlaybackDetails = () => {
   return (
     <Stack
       direction="column"

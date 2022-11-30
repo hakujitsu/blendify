@@ -19,6 +19,26 @@ export const callPlaySongs = ({
   });
 };
 
+export const callSeekPosition = ({
+  device_id,
+  position_ms,
+  playerInstance: {
+    _options: {
+      getOAuthToken
+    }
+  }
+}) => {
+  getOAuthToken(access_token => {
+    fetch(`https://api.spotify.com/v1/me/player/seek?device_id=${device_id}&position_ms=${position_ms}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`
+      },
+    });
+  });
+};
+
 export const callResumeSong = ({
   device_id,
   spotify_uris,

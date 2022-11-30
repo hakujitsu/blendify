@@ -14,10 +14,6 @@ const sx = {
 }
 
 const WebPlayback = () => {
-  // const [isPaused, setPaused] = useState(false);
-  // const [isActive, setActive] = useState(false);
-  // const [currentTrack, setTrack] = useState(track);
-
   return (
     <Stack
       direction="row"

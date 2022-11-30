@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { setCurrentSong, setIsPlaying } from "../store/slices/webPlayback"
-import { callPauseSong, callPlaySongs, callResumeSong, callToggleVolume } from "../util/playback"
+import { callPauseSong, callPlaySongs, callResumeSong, callSeekPosition, callToggleVolume } from "../util/playback"
 import { usePlayerContext } from "./player/usePlayerContext"
 
 /**
@@ -44,6 +44,16 @@ const usePlayback = () => {
     dispatch(setIsPlaying(true))
   }
 
+  const seekPosition = (position_ms) => {
+    callSeekPosition(
+      {
+        device_id: deviceId,
+        position_ms,
+        playerInstance: player,
+      }
+    )
+  }
+
   const toggleVolume = (volume) => {
     callToggleVolume({
       volume,
@@ -52,7 +62,7 @@ const usePlayback = () => {
     });
   }
 
-  return { playSong, pauseSong, resumeSong, toggleVolume }
+  return { playSong, pauseSong, seekPosition, resumeSong, toggleVolume }
 }
 
 export default usePlayback;
