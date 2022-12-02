@@ -4,20 +4,25 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import AlbumIcon from '@mui/icons-material/Album';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import useHistory from "../../hooks/useHistory";
-
 
 const sx = {
   menuText: {
     ml: 1,
-    // fontWeight: "bold"
+    color: "#bdafbd"
   },
   menuItem: {
     py: 1.5,
     mx: 1,
     borderRadius: "16px",
-  }
+  },
+  menuIconColor: {
+    color: "#bdafbd"
+  },
+  selectedMenuText: {
+    color: "white"
+  },
 }
 
 const MENU_ITEMS = [
@@ -46,17 +51,25 @@ const MENU_ITEMS = [
 
 const DrawerMenu = () => {
   const { navigateTo } = useHistory();
+  const location = useLocation();
 
   return (
     <MenuList sx={{ width: '100%' }}>
       {MENU_ITEMS.map(item => (
-        <MenuItem key={item.text} sx={sx.menuItem}
+        <MenuItem
+          key={item.text}
+          sx={sx.menuItem}
           onClick={() => navigateTo(item.route)}
         >
-          <ListItemIcon>
+          <ListItemIcon sx={location.pathname === item.route ? sx.selectedMenuText : sx.menuIconColor}>
             {item.icon}
           </ListItemIcon>
-          <Typography variant="body1" sx={sx.menuText}>{item.text}</Typography>
+          <Typography
+            variant="body1"
+            sx={[sx.menuText, location.pathname === item.route ? sx.selectedMenuText : {}]}
+          >
+            {item.text}
+          </Typography>
         </MenuItem>
       ))}
     </MenuList>
