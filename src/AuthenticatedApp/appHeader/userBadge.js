@@ -12,6 +12,7 @@ const sx = {
     height: "36px",
     backgroundColor: "background.border",
     borderRadius: 100,
+    cursor: "pointer",
     "&:hover": {
       backgroundColor: "#483063",
     }
