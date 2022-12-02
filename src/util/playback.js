@@ -6,6 +6,9 @@ export const callGetCurrentTrack = async (access_token) => {
       'Authorization': `Bearer ${access_token}`
     },
   })
+  if (response.status !== 200) {
+    return null
+  }
   const { item } = await response.json();
   return item
 };

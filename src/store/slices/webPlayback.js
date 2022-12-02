@@ -21,14 +21,6 @@ export const webPlaybackSlice = createSlice({
     setIsPlaying: (state, action) => {
       state.isPlaying = action.payload
     },
-    setCurrentSong: (state, action) => {
-      const { song, context, queue } = action.payload
-      state.contextType = context;
-      state.currentSong = song;
-      state.isPlaying = true
-      state.progress = 0
-      state.queue = queue
-    },
     incrementProgress: (state) => {
       if (state.currentSong.track.duration_ms > state.progress) {
         state.progress += 500
@@ -44,7 +36,8 @@ export const webPlaybackSlice = createSlice({
     },
     updateState: (state, action) => {
       const { currentSong, isPlaying, progress } = action.payload
-      if (currentSong && state.currentSong.track.uri !== currentSong.track.uri) {
+      if (currentSong) {
+        if (!state.currentSong || (state.currentSong.track.uri !== currentSong.track.uri))
         state.currentSong = currentSong
       }
       state.isPlaying = isPlaying

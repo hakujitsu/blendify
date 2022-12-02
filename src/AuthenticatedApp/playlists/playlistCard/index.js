@@ -35,7 +35,7 @@ const PlaylistCard = (props) => {
     >
       <CardActionArea disableRipple sx={sx.cardActionArea} onClick={navigateToPlaylist}>
         <CardContent sx={sx.cardActionArea}>
-          <PlaylistImage img={playlist.images.length > 0 ? playlist.images[0].url : ""} showPlayButton={showPlayButton} />
+          <PlaylistImage img={playlist.images.length > 0 ? playlist.images[0].url : ""} showPlayButton={showPlayButton} uri={playlist.uri}/>
           <PlaylistDesc title={playlist.title} desc={playlist.description} owner={playlist.owner.display_name} />
         </CardContent>
       </CardActionArea>

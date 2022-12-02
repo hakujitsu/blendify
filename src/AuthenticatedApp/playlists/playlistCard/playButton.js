@@ -25,10 +25,11 @@ const sx = {
 }
 
 const PlayButton = (props) => {
-  const { showPlayButton, title } = props;
+  const { showPlayButton, title, play } = props;
 
   const onClick = (e) => {
     e.stopPropagation()
+    play()
   }
 
   return (

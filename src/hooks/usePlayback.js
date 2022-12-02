@@ -27,30 +27,21 @@ const usePlayback = () => {
   const dispatch = useDispatch()
 
   const playSongs = (song, songs, context) => {
-    console.log(songs)
     const spotify_uris = songs.map(s => s.track.uri)
-    console.log(song)
     callPlaySongs({
       device_id: deviceId,
       playerInstance: player,
       spotify_uris,
     });
-    // TODO: get queue with api
-    dispatch(setCurrentSong({ song, queue: songs, context }))
   }
 
   const playSpotifyCollection = (song, context_uri, offset, context) => {
-    console.log(song)
-    console.log(context_uri)
-    console.log(offset)
     callPlaySpotifyCollection({
       device_id: deviceId,
       playerInstance: player,
       context_uri,
       offset,
     });
-    // TODO: get queue with api, and set queue
-    dispatch(setCurrentSong({ song, queue: [], context }))
   }
 
   const playSongFromLikedSongs = (likedSongs) => (song, index) => {

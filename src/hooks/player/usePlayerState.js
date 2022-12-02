@@ -31,7 +31,10 @@ const usePlayerState = () => {
         updatedSong = songs.find(s => s.track.uri === currentUri)
       }
       if (!updatedSong) {
-        updatedSong = {track: await callGetCurrentTrack(accessToken)}
+        const track = await callGetCurrentTrack(accessToken)
+        if (track) {
+          updatedSong = { track }
+        }
       }
       dispatch(updateState({ currentSong: updatedSong, isPlaying, progress }))
     }
