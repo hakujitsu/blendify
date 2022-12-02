@@ -1,5 +1,5 @@
 import { Paper } from "@mui/material"
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 
 const sx = {
   background: {
@@ -20,13 +20,14 @@ const sx = {
     }
   },
 }
-const LikedSongsIcon = (props) => {
+
+const PlaylistsIcon = (props) => {
   const { height } = props
   return (
     <Paper elevation={3} sx={sx.paper(height)} style={sx.background}>
-      <FavoriteIcon sx={sx.icon(height)} />
+      <LibraryMusicIcon sx={sx.icon(height)} />
     </Paper>
   )
 }
 
-export default LikedSongsIcon;
+export default PlaylistsIcon

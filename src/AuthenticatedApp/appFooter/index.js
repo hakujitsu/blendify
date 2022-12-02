@@ -1,10 +1,12 @@
 import { Box } from "@mui/material"
-import { FOOTER_HEIGHT } from "../../styles/layout";
+import WebPlayback from "../../components/webPlayback";
+import { FOOTER_HEIGHT, MIN_WIDTH } from "../../styles/layout";
 
 const sx = {
   footer: {
-    width: "100vw",
+    width: "100%",
     height: FOOTER_HEIGHT,
+    minWidth: MIN_WIDTH,
     backgroundColor: "background.drawer",
     borderTop: 1,
     borderColor: "background.border",
@@ -15,7 +17,7 @@ const sx = {
 const AppFooter = () => {
   return (
     <Box sx={sx.footer} >
-      footer
+      <WebPlayback />
     </Box>
   )
 }

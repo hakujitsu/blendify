@@ -5,7 +5,7 @@ import LoadingScreen from "./LoadingScreen";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || "";
 
-const HomePage = () => {
+const LandingPage = () => {
   const [loading, setLoading] = useState(true)
   const { authenticateWithToken } = useAuth();
 
@@ -20,7 +20,7 @@ const HomePage = () => {
     const params = new URLSearchParams({
       response_type: "code",
       client_id: CLIENT_ID,
-      scope: "user-read-private user-read-email user-library-read playlist-read-private streaming",
+      scope: "user-read-private user-read-email user-library-read user-read-playback-state playlist-read-private streaming",
       redirect_uri: redirect_uri,
       state: "1234123412341234", // TODO: add some state here
       show_dialog: "true",
@@ -44,4 +44,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default LandingPage;

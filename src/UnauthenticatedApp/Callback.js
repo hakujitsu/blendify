@@ -22,12 +22,12 @@ const Callback = () => {
     // TODO: add error handling
 
     if (!effectCalled.current && code) {
-
       authenticate(code);
     }
   }, []);
 
   useEffect(() => {
+    console.log(userDetails)
     if (userDetails) {
       navigate("/");
     }
