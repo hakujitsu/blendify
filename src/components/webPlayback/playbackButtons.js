@@ -1,4 +1,4 @@
-import { Box, Fab, IconButton, Stack } from "@mui/material";
+import { Fab, IconButton, Stack } from "@mui/material";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
@@ -18,7 +18,7 @@ const sx = {
 
 const PlaybackButtons = () => {
   const { isPlaying } = useSelector((state) => state.webPlayback)
-  const { pauseSong, resumeSong } = usePlayback();
+  const { pauseSong, resumeSong, previousSong, nextSong } = usePlayback();
 
   const togglePlay = () => {
     if (isPlaying) {
@@ -37,7 +37,7 @@ const PlaybackButtons = () => {
     >
       <IconButton
         size="small"
-        // onClick={playSong}
+        onClick={previousSong}
       >
         <SkipPreviousIcon />
       </IconButton>
@@ -51,7 +51,7 @@ const PlaybackButtons = () => {
       </Fab>
       <IconButton
         size="small"
-        // onClick={() => { player.nextTrack() }}
+        onClick={nextSong}
       >
         <SkipNextIcon />
       </IconButton>
