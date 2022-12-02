@@ -5,7 +5,7 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
-import HomePage from "./UnauthenticatedApp/HomePage";
+import LandingPage from "./UnauthenticatedApp/LandingPage";
 import Callback from "./UnauthenticatedApp/Callback";
 import AuthenticatedApp from "./AuthenticatedApp";
 import {
@@ -20,13 +20,14 @@ import './App.css';
 import Playlists from "./AuthenticatedApp/playlists";
 import LikedSongsPage from "./AuthenticatedApp/likedSongs";
 import PlaylistPage from "./AuthenticatedApp/playlist";
+import HomePage from "./AuthenticatedApp/homePage";
 
 const unauthenticatedRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<LandingPage />} />
       <Route path="/callback" element={<Callback />} />
-      <Route path="/*" element={<HomePage />} />
+      <Route path="/*" element={<LandingPage />} />
     </Route>
   )
 );
@@ -34,11 +35,11 @@ const unauthenticatedRouter = createBrowserRouter(
 const playerRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<AuthenticatedApp />}>
-      <Route path="/" element={<Playlists />} index />
+      <Route path="/" element={<HomePage />} index />
       <Route path="playlists" element={<Playlists />} />
       <Route path="playlist/:playlistId" element={<PlaylistPage />} />
       <Route path="liked-songs" element={<LikedSongsPage />} />
-      <Route path="/*" element={<Navigate to="/"/>} />
+      <Route path="/*" element={<Navigate to="/" />} />
     </Route>
   )
 );

@@ -5,7 +5,7 @@ import LoadingScreen from "./LoadingScreen";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || "";
 
-const HomePage = () => {
+const LandingPage = () => {
   const [loading, setLoading] = useState(true)
   const { authenticateWithToken } = useAuth();
 
@@ -44,4 +44,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default LandingPage;
