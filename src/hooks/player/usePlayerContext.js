@@ -1,14 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setDeviceId, setIsPlaying, setProgress } from "../../store/slices/webPlayback";
+import { setDeviceId } from "../../store/slices/webPlayback";
 import { useAuthContext } from "../auth/useAuthContext";
+import usePlayerState from "./usePlayerState";
 
 export const PlayerContext = createContext(null);
 
 export const usePlayerContextProvider = () => {
   const [spotifyPlayer, setSpotifyPlayer] = useState(null);
-
   const { accessToken } = useAuthContext();
+  const { updatePlayerState } = usePlayerState();
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -36,20 +37,20 @@ export const usePlayerContextProvider = () => {
         console.log('Device ID has gone offline', device_id);
       });
 
-      player.addListener('player_state_changed', (state => {
-        console.log(state)
-        if (!state) {
-          return;
-        } else if (state.position) {
-          console.log(state.position)
-          dispatch(setIsPlaying(!state.paused))
-          dispatch(setProgress(state.position))
-        }
-      }));
-
       player.connect();
     };
   }, []);
+
+  useEffect(() => {
+    if (spotifyPlayer) {
+      spotifyPlayer.removeListener('player_state_changed');
+      spotifyPlayer.addListener('player_state_changed', (state => {
+        console.log(state)
+        updatePlayerState(state)
+      }));
+    }
+  }, [updatePlayerState])
+
   return { player: spotifyPlayer }
 };
 

@@ -9,6 +9,7 @@ import SongRowSkeleton from "../../components/playlistSongTable/songRowSkeleton"
 import useGenerateRows from "../../components/playlistSongTable/useGenerateRows";
 import useVirtualRowDisplay from "../../components/virtualisedRowDisplay/useVirtualRowDisplay";
 import usePlaylist from "../../hooks/data/usePlaylist";
+import usePlayback from "../../hooks/usePlayback";
 import playlists from "../../store/slices/playlists";
 import { BODY_HEIGHT, BODY_WIDTH } from "../../styles/layout";
 
@@ -23,6 +24,7 @@ const sx = {
 const PlaylistPage = () => {
   let { playlistId } = useParams();
   const { playlist, fetchPlaylistTracks } = usePlaylist(playlistId);
+  const { playSongFromPlaylist } = usePlayback();
   const theme = useTheme();
   const lessThanLg = useMediaQuery(theme.breakpoints.down('lg'));
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'));
@@ -56,7 +58,8 @@ const PlaylistPage = () => {
   const { onScroll, visibleChildren } = useVirtualRowDisplay({
     children: useGenerateRows({
       songs: playlist.tracks, showAlbum: !lessThanMd, showDate: !lessThanLg,
-      setObservedElement, hasMoreSongs: playlist.hasMoreSongs, totalNumber: playlist.totalSongs
+      setObservedElement, hasMoreSongs: playlist.hasMoreSongs, totalNumber: playlist.totalSongs,
+      playSong: playSongFromPlaylist(playlist.uri),
     }),
     rowHeight: 64,
     skeletonRow: <SongRowSkeleton showAlbum={!lessThanMd} showDate={!lessThanLg} />,

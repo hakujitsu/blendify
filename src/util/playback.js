@@ -1,4 +1,38 @@
-export const callPlaySongs = ({
+export const callGetCurrentTrack = async (access_token) => {
+  const response = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${access_token}`
+    },
+  })
+  const { item } = await response.json();
+  return item
+};
+
+export const callPlaySpotifyCollection = async ({
+  device_id,
+  context_uri,
+  offset,
+  playerInstance: {
+    _options: {
+      getOAuthToken
+    }
+  }
+}) => {
+  await getOAuthToken(access_token => {
+    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ context_uri, offset: { position: offset } }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`
+      },
+    });
+  });
+};
+
+export const callPlaySongs = async ({
   device_id,
   spotify_uris,
   playerInstance: {
@@ -7,7 +41,7 @@ export const callPlaySongs = ({
     }
   }
 }) => {
-  getOAuthToken(access_token => {
+  await getOAuthToken(access_token => {
     fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
       method: 'PUT',
       body: JSON.stringify({ uris: spotify_uris }),
@@ -19,7 +53,7 @@ export const callPlaySongs = ({
   });
 };
 
-export const callSeekPosition = ({
+export const callSeekPosition = async ({
   device_id,
   position_ms,
   playerInstance: {
@@ -28,7 +62,7 @@ export const callSeekPosition = ({
     }
   }
 }) => {
-  getOAuthToken(access_token => {
+  await getOAuthToken(access_token => {
     fetch(`https://api.spotify.com/v1/me/player/seek?device_id=${device_id}&position_ms=${position_ms}`, {
       method: 'PUT',
       headers: {
@@ -39,7 +73,7 @@ export const callSeekPosition = ({
   });
 };
 
-export const callResumeSong = ({
+export const callResumeSong = async ({
   device_id,
   spotify_uris,
   playerInstance: {
@@ -48,7 +82,7 @@ export const callResumeSong = ({
     }
   }
 }) => {
-  getOAuthToken(access_token => {
+  await getOAuthToken(access_token => {
     fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
       method: 'PUT',
       headers: {
@@ -59,7 +93,7 @@ export const callResumeSong = ({
   });
 };
 
-export const callPauseSong = ({
+export const callPauseSong = async ({
   device_id,
   playerInstance: {
     _options: {
@@ -67,7 +101,7 @@ export const callPauseSong = ({
     }
   }
 }) => {
-  getOAuthToken(access_token => {
+  await getOAuthToken(access_token => {
     fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${device_id}`, {
       method: 'PUT',
       headers: {
@@ -78,7 +112,45 @@ export const callPauseSong = ({
   });
 };
 
-export const callToggleVolume = ({
+export const callPreviousSong = async ({
+  device_id,
+  playerInstance: {
+    _options: {
+      getOAuthToken
+    }
+  }
+}) => {
+  await getOAuthToken(access_token => {
+    fetch(`https://api.spotify.com/v1/me/player/previous?device_id=${device_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`
+      },
+    });
+  });
+};
+
+export const callNextSong = async ({
+  device_id,
+  playerInstance: {
+    _options: {
+      getOAuthToken
+    }
+  }
+}) => {
+  await getOAuthToken(access_token => {
+    fetch(`https://api.spotify.com/v1/me/player/next?device_id=${device_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`
+      },
+    });
+  });
+};
+
+export const callToggleVolume = async ({
   volume,
   device_id,
   playerInstance: {
@@ -87,7 +159,7 @@ export const callToggleVolume = ({
     }
   }
 }) => {
-  getOAuthToken(access_token => {
+  await getOAuthToken(access_token => {
     fetch(`https://api.spotify.com/v1/me/player/volume?device_id=${device_id}&volume_percent=${volume}`, {
       method: 'PUT',
       headers: {
@@ -99,7 +171,7 @@ export const callToggleVolume = ({
 };
 
 // Use this at later date
-export const callPlayContext = ({
+export const callPlayContext = async ({
   device_id,
   context_uri,
   offset = 0,
@@ -110,7 +182,7 @@ export const callPlayContext = ({
     }
   }
 }) => {
-  getOAuthToken(access_token => {
+  await getOAuthToken(access_token => {
     fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
       method: 'PUT',
       body: JSON.stringify({ context_uri, offset, position_ms }),

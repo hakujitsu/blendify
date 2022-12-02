@@ -8,6 +8,7 @@ import SongTitleBox from "./songTitleCell";
 import React, { useState } from "react";
 import usePlayback from "../../hooks/usePlayback";
 import PlayingAnimation from "./playingAnimation";
+import SongIndex from "./songIndex";
 
 const sx = {
   durationText: {
@@ -31,9 +32,8 @@ const sx = {
 }
 
 const SongRow = React.forwardRef((props, ref) => {
-  const { song, index, showAlbum, showDate } = props;
+  const { song, index, playSong, showAlbum, showDate } = props;
   const [showPlayButton, setShowPlayButton] = useState(false)
-  const { playSong } = usePlayback()
 
   return (
     <div
@@ -43,16 +43,7 @@ const SongRow = React.forwardRef((props, ref) => {
     >
       <RowLayout
         indexContent={
-          showPlayButton ?
-            <Box sx={sx.playButton}>
-              <PlayArrowIcon onClick={() => playSong(song.track.uri, song)} />
-            </Box> :
-            // <Box sx={sx.playingAnimation}>
-            //   <PlayingAnimation />
-            // </Box>
-          <Typography noWrap align="right">
-            {index + 1}
-          </Typography>
+          <SongIndex index={index} playSong={playSong} showPlayButton={showPlayButton} song={song} />
         }
         titleContent={
           < SongTitleBox image={song.track.album.images.slice(-1)[0].url} title={song.track.name} artists={song.track.artists} />

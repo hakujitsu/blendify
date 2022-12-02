@@ -76,7 +76,7 @@ const PlaybackProgress = () => {
       />
       <Box sx={sx.timeText}>
         <Typography variant="caption" align="left">
-          {currentSong ? convertMsToSongDuration(currentSong.track.duration_ms) : ""}
+          {currentSong && currentSong.track ? convertMsToSongDuration(currentSong.track.duration_ms) : ""}
         </Typography>
       </Box>
     </Stack>
