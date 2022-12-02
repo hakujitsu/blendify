@@ -1,13 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { convertMsToSongDuration, getDateAddedString } from "../../util/datetime";
 import RowLayout from "./rowLayout";
 import SongTitleBox from "./songTitleCell";
 import React, { useState } from "react";
-import usePlayback from "../../hooks/usePlayback";
-import PlayingAnimation from "./playingAnimation";
 import SongIndex from "./songIndex";
 
 const sx = {

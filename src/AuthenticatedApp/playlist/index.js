@@ -10,7 +10,6 @@ import useGenerateRows from "../../components/playlistSongTable/useGenerateRows"
 import useVirtualRowDisplay from "../../components/virtualisedRowDisplay/useVirtualRowDisplay";
 import usePlaylist from "../../hooks/data/usePlaylist";
 import usePlayback from "../../hooks/usePlayback";
-import playlists from "../../store/slices/playlists";
 import { BODY_HEIGHT, BODY_WIDTH } from "../../styles/layout";
 
 const sx = {

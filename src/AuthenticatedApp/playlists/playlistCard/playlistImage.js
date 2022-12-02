@@ -56,10 +56,10 @@ const PlaylistImage = (props) => {
             image={img}
             alt={title + " image"}
             sx={sx.cardImage}
-          /> :
-          <IconPlaceholder />
+          />
+          : <IconPlaceholder />
         }
-        <PlayButton showPlayButton={showPlayButton} title={title} play={() => playSongFromPlaylist(uri)(null,0)}/>
+        <PlayButton showPlayButton={showPlayButton} title={title} play={() => playSongFromPlaylist(uri)(null, 0)} />
       </Card>
     </Box>
   )

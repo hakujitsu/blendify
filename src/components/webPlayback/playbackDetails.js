@@ -4,7 +4,7 @@ import PlaybackProgress from "./playbackProgress";
 
 const sx = {
   container: {
-    width: "45%",
+    width: "max(240px, (100vw - 40px - 48px) / 10 * 4)",
   }
 }
 

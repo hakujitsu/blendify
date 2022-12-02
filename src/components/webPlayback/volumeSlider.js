@@ -6,6 +6,9 @@ import { useCallback, useState } from 'react';
 import usePlayback from '../../hooks/usePlayback';
 
 const sx = {
+  container: {
+    width: "max(240px, (100vw - 40px - 48px) / 10 * 3)",
+  },
   slider: {
     width: "100px",
     height: "5px",
@@ -36,6 +39,7 @@ const VolumeSlider = () => {
       justifyContent="flex-end"
       alignItems="center"
       spacing={2}
+      sx={sx.container}
     >
       <VolumeDownIcon fontSize="small" />
       <Slider

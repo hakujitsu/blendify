@@ -4,13 +4,10 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useSelector } from "react-redux"
 import MusicOffIcon from '@mui/icons-material/MusicOff';
 
-// TODO: fix overflow bug
-
 const sx = {
   container: {
     height: "100%",
-    width: "30%",
-    maxWidth: "30%",
+    width: "max(240px, (100vw - 40px - 48px) / 10 * 3)",
   },
   placeholderBox: {
     height: "56px",
@@ -32,7 +29,7 @@ const SongDetails = () => {
         justifyContent="flex-start"
         alignItems="center"
         spacing={2}
-        sx={sx.stack}
+        sx={sx.container}
       >
         <Box sx={sx.placeholderBox}>
           <MusicOffIcon />
@@ -48,10 +45,11 @@ const SongDetails = () => {
       justifyContent="flex-start"
       alignItems="center"
       spacing={2}
-      sx={sx.stack}
+      sx={sx.container}
     >
       <img
         src={currentSong.track.album.images.slice(-1)[0].url}
+        alt={currentSong.track.name}
         width="56px"
         height="56px"
       />
@@ -59,6 +57,7 @@ const SongDetails = () => {
         direction="column"
         justifyContent="center"
         spacing={0.25}
+        sx={{ maxWidth: `calc(max(240px, (100vw - 40px - 48px) / 10 * 3) - 56px - 32px - 17px)` }}
       >
         <Typography variant="body2" noWrap>{currentSong.track.name}</Typography>
         <Typography variant="caption" noWrap>{currentSong.track.artists.map(a => a.name).join(", ")}</Typography>

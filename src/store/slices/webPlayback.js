@@ -8,7 +8,6 @@ const initialState = {
   isPlaying: false,
   isShuffle: false,
   progress: 0,
-  queue: [],
 }
 
 export const webPlaybackSlice = createSlice({
@@ -24,11 +23,6 @@ export const webPlaybackSlice = createSlice({
     incrementProgress: (state) => {
       if (state.currentSong.track.duration_ms > state.progress) {
         state.progress += 500
-      } else if (state.queue.length > 0) {
-        state.currentSong = state.queue[0]
-        state.queue = state.queue.shift()
-      } else {
-        state.isPlaying = false
       }
     },
     setProgress: (state, action) => {

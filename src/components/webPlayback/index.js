@@ -19,7 +19,7 @@ const WebPlayback = () => {
       direction="row"
       justifyContent="space-between"
       alignItems="center"
-      spacing={0}
+      spacing={3}
       sx={sx.container}
     >
       <SongDetails />
