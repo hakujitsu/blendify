@@ -4,6 +4,7 @@ import useAuth from "../hooks/auth/useAuth";
 import LoadingScreen from "./LoadingScreen";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || "";
+const CALLBACK_URL = process.env.REACT_APP_CALLBACK_URL || "http://localhost:3000/callback"
 
 const LandingPage = () => {
   const [loading, setLoading] = useState(true)
@@ -15,13 +16,11 @@ const LandingPage = () => {
   }
 
   const generateQueryString = () => {
-    const redirect_uri = "http://localhost:3000/callback";
-
     const params = new URLSearchParams({
       response_type: "code",
       client_id: CLIENT_ID,
       scope: "user-read-private user-read-email user-library-read user-read-playback-state playlist-read-private streaming",
-      redirect_uri: redirect_uri,
+      redirect_uri: CALLBACK_URL,
       state: "1234123412341234", // TODO: add some state here
       show_dialog: "true",
     });
