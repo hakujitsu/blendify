@@ -30,9 +30,6 @@ const darkTheme = createTheme({
       //   fontFamily: "Comfortaa"
       // }
     },
-    // text: {
-    //   primary: "#f2efed"
-    // }
   },
   components: {
     MuiPaper: {

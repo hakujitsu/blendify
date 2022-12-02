@@ -1,0 +1,51 @@
+#bars {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  /* left: 50%;
+  margin: -30px 0 0 -20px;
+  position: relative;
+  top: 50%;
+  width: 40px; */
+}
+
+.bar {
+  background: #cd5dde;
+  bottom: 1px;
+  height: 3px;
+  position: absolute;
+  width: 5px;
+  animation: sound 0ms -800ms linear infinite alternate;
+}
+
+@keyframes sound {
+  0% {
+    opacity: .35;
+    height: 3px;
+  }
+
+  100% {
+    opacity: 1;
+    height: 28px;
+  }
+}
+
+.bar:nth-child(1) {
+  left: 1px;
+  animation-duration: 474ms;
+}
+
+.bar:nth-child(2) {
+  left: 7px;
+  animation-duration: 433ms;
+}
+
+.bar:nth-child(3) {
+  left: 13px;
+  animation-duration: 407ms;
+}
+
+.bar:nth-child(4) {
+  left: 19px;
+  animation-duration: 458ms;
+}

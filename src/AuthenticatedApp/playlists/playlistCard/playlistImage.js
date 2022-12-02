@@ -1,6 +1,7 @@
 import { Box, Card, CardMedia } from "@mui/material"
 import PlayButton from "./playButton";
 import IconPlaceholder from "./iconPlaceholder";
+import usePlayback from "../../../hooks/usePlayback";
 
 const sx = {
   box: {
@@ -43,7 +44,8 @@ const sx = {
 }
 
 const PlaylistImage = (props) => {
-  const { title, img, showPlayButton } = props
+  const { title, img, showPlayButton, uri } = props
+  const { playSongFromPlaylist } = usePlayback()
 
   return (
     <Box sx={sx.box}>
@@ -54,10 +56,10 @@ const PlaylistImage = (props) => {
             image={img}
             alt={title + " image"}
             sx={sx.cardImage}
-          /> :
-          <IconPlaceholder/>
+          />
+          : <IconPlaceholder />
         }
-        <PlayButton showPlayButton={showPlayButton} title={title} />
+        <PlayButton showPlayButton={showPlayButton} title={title} play={() => playSongFromPlaylist(uri)(null, 0)} />
       </Card>
     </Box>
   )

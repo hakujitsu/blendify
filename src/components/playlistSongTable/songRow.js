@@ -1,15 +1,23 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { convertMsToSongDuration, getDateAddedString } from "../../util/datetime";
 import RowLayout from "./rowLayout";
 import SongTitleBox from "./songTitleCell";
 import React, { useState } from "react";
+import SongIndex from "./songIndex";
 
 const sx = {
   durationText: {
     pr: 2
+  },
+  playingAnimation: {
+    height: "100%",
+    display: "flex",
+    alignItems: "flex-end",
+    justifyContent: "center",
+    mt: 3,
+    ml: 1
   },
   playButton: {
     height: "100%",
@@ -21,7 +29,7 @@ const sx = {
 }
 
 const SongRow = React.forwardRef((props, ref) => {
-  const { song, index, showAlbum, showDate } = props;
+  const { song, index, playSong, showAlbum, showDate } = props;
   const [showPlayButton, setShowPlayButton] = useState(false)
 
   return (
@@ -32,13 +40,7 @@ const SongRow = React.forwardRef((props, ref) => {
     >
       <RowLayout
         indexContent={
-          showPlayButton ?
-            <Box sx={sx.playButton}>
-              <PlayArrowIcon />
-            </Box> :
-            <Typography noWrap align="right">
-              {index + 1}
-            </Typography>
+          <SongIndex index={index} playSong={playSong} showPlayButton={showPlayButton} song={song} />
         }
         titleContent={
           < SongTitleBox image={song.track.album.images.slice(-1)[0].url} title={song.track.name} artists={song.track.artists} />

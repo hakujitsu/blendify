@@ -6,6 +6,7 @@ import AppFooter from "./appFooter";
 import { store } from '../store/index'
 import { Provider } from 'react-redux'
 import { DRAWER_WIDTH } from "../styles/layout";
+import { PlayerContext, usePlayerContextProvider } from "../hooks/player/usePlayerContext";
 
 const sx = {
   container: {
@@ -57,13 +58,22 @@ const AuthenticatedApp = () => {
   )
 }
 
-
 const AuthenticatedAppWrapper = () => {
+  const playerContextValue = usePlayerContextProvider()
+
+  return (
+    <PlayerContext.Provider value={playerContextValue}>
+      <AuthenticatedApp />
+    </PlayerContext.Provider>
+  )
+}
+
+const ReduxWrapper = () => {
   return (
     <Provider store={store}>
-      <AuthenticatedApp />
+      <AuthenticatedAppWrapper />
     </Provider>
   )
 }
 
-export default AuthenticatedAppWrapper;
+export default ReduxWrapper;

@@ -6,7 +6,7 @@ const sx = {
   body: {
     height: `calc(100vh - ${HEADER_HEIGHT} -${FOOTER_HEIGHT})`,
     overflowY: "auto",
-    m: 4
+    mx: 4
   },
 }
 

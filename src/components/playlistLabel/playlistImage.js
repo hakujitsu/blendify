@@ -27,7 +27,7 @@ const PlaylistImage = (props) => {
   } else if (likedSongs) {
     return (
       <Box sx={sx.container}>
-        <LikedSongsIcon />
+        <LikedSongsIcon height={128}/>
       </Box>
     )
   } else {
