@@ -4,6 +4,7 @@ import PlaylistTitleLabel from "./playlistTitleLabel";
 
 const sx = {
   container: {
+    mt: 4,
     height: "160px",
     mb: "8px",
   }

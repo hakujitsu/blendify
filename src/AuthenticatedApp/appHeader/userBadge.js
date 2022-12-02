@@ -12,6 +12,9 @@ const sx = {
     height: "36px",
     backgroundColor: "background.border",
     borderRadius: 100,
+    "&:hover": {
+      backgroundColor: "#483063",
+    }
   },
   icon: {
     display: "flex",
@@ -23,6 +26,9 @@ const sx = {
     height: "36px",
     width: "36px",
     borderRadius: 100,
+  },
+  name: {
+    fontWeight: "bold"
   },
   stack: {
     width: "100%",
@@ -52,7 +58,9 @@ const UserBadge = () => {
           sx={sx.stack}
         >
           <img src={userDetails?.img} alt="profile image" style={sx.image}></img>
-          <Typography variant="body2">{userDetails?.username}</Typography>
+          <Typography variant="body2" sx={sx.name}>
+            {userDetails?.username}
+          </Typography>
           <Box sx={sx.icon}>
             {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
           </Box>

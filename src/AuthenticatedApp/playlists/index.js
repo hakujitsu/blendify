@@ -7,6 +7,7 @@ import PlaylistGrid from "./playlistGrid";
 
 const sx = {
   stack: {
+    py: 4,
     maxHeight: BODY_HEIGHT,
     maxWidth: BODY_WIDTH,
     overflowY: "auto"

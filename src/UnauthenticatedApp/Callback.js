@@ -28,6 +28,7 @@ const Callback = () => {
   }, []);
 
   useEffect(() => {
+    console.log(userDetails)
     if (userDetails) {
       navigate("/");
     }

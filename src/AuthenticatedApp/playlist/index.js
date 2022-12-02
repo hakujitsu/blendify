@@ -16,7 +16,7 @@ const sx = {
   stack: {
     height: BODY_HEIGHT,
     maxWidth: BODY_WIDTH,
-    overflowY: "auto"
+    overflowY: "auto",
   }
 }
 

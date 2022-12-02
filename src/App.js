@@ -38,6 +38,7 @@ const playerRouter = createBrowserRouter(
       <Route path="playlists" element={<Playlists />} />
       <Route path="playlist/:playlistId" element={<PlaylistPage />} />
       <Route path="liked-songs" element={<LikedSongsPage />} />
+      <Route path="/*" element={<Navigate to="/"/>} />
     </Route>
   )
 );

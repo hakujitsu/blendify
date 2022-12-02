@@ -69,6 +69,7 @@ const PlaybackProgress = () => {
         aria-label="Volume"
         min={0}
         max={currentSong ? currentSong.track.duration_ms : 100}
+        disabled={!currentSong}
         value={progress}
         onChange={handleChange}
         onChangeCommitted={onChangeCommitted}
