@@ -17,7 +17,6 @@ const Callback = () => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
-
     const code = searchParams.get("code");
     const error = searchParams.get("error");
     // TODO: add error handling

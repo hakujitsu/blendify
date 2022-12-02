@@ -25,11 +25,6 @@ const darkTheme = createTheme({
     secondary: {
       main: "#19c0e7",
     },
-    typography: {
-      // logo: {
-      //   fontFamily: "Comfortaa"
-      // }
-    },
     // text: {
     //   primary: "#f2efed"
     // }
