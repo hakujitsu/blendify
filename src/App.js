@@ -26,7 +26,7 @@ const unauthenticatedRouter = createBrowserRouter(
     <Route path="/">
       <Route path="/" element={<HomePage />} />
       <Route path="/callback" element={<Callback />} />
-      <Route path="/*" element={<Navigate to="/" replace />} />
+      <Route path="/*" element={<HomePage />} />
     </Route>
   )
 );
@@ -38,7 +38,6 @@ const playerRouter = createBrowserRouter(
       <Route path="playlists" element={<Playlists />} />
       <Route path="playlist/:playlistId" element={<PlaylistPage />} />
       <Route path="liked-songs" element={<LikedSongsPage />} />
-      <Route path="/callback" element={<Navigate to="/" replace />} />
     </Route>
   )
 );
