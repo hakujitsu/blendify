@@ -28,7 +28,7 @@ const SongIndex = (props) => {
   return (
     showPlayButton ?
       <Box sx={sx.playButton}>
-        <PlayArrowIcon onClick={() => playSong(song, index)} />
+        <PlayArrowIcon onClick={() => playSong(index)} />
       </Box>
       : (isPlaying && currentSong && currentSong.track.uri === song.track.uri ?
         <Box sx={sx.playingAnimation}>

@@ -76,7 +76,12 @@ const LikedSongsPage = () => {
       sx={sx.stack}
       onScroll={onScroll}
     >
-      <PlaylistLabel title="Liked Songs" numOfSongs={totalNumber} likedSongs={true}/>
+      <PlaylistLabel
+        title="Liked Songs"
+        numOfSongs={totalNumber}
+        likedSongs={true}
+        play={() => playSongFromLikedSongs(likedSongs)(0)}
+      />
       <PlaylistTable
         hasMoreSongs={hasMoreSongs}
         songs={likedSongs}

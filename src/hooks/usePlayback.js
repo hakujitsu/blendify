@@ -26,7 +26,7 @@ const usePlayback = () => {
   const { deviceId, isShuffle } = useSelector((state) => state.webPlayback)
   const dispatch = useDispatch()
 
-  const playSongs = (song, songs, context) => {
+  const playSongs = (songs, context) => {
     const spotify_uris = songs.map(s => s.track.uri)
     callPlaySongs({
       device_id: deviceId,
@@ -35,7 +35,7 @@ const usePlayback = () => {
     });
   }
 
-  const playSpotifyCollection = (song, context_uri, offset, context) => {
+  const playSpotifyCollection = (context_uri, offset, context) => {
     callPlaySpotifyCollection({
       device_id: deviceId,
       playerInstance: player,
@@ -44,16 +44,16 @@ const usePlayback = () => {
     });
   }
 
-  const playSongFromLikedSongs = (likedSongs) => (song, index) => {
+  const playSongFromLikedSongs = (likedSongs) => (index) => {
     if (isShuffle) {
-      playSongs(song, likedSongs, CONTEXT_TYPE.likedSongs)
+      playSongs(likedSongs, CONTEXT_TYPE.likedSongs)
     } else {
-      playSongs(song, likedSongs.slice(index), CONTEXT_TYPE.likedSongs)
+      playSongs(likedSongs.slice(index), CONTEXT_TYPE.likedSongs)
     }
   }
 
   const playSongFromPlaylist = (context_uri) => (song, index) => {
-    playSpotifyCollection(song, context_uri, index, CONTEXT_TYPE.spotifyPlaylist)
+    playSpotifyCollection(context_uri, index, CONTEXT_TYPE.spotifyPlaylist)
   }
 
   const pauseSong = () => {

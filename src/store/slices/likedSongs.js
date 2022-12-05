@@ -15,7 +15,7 @@ export const likedSongsSlice = createSlice({
       const { totalNumber, offset, songsToAdd } = action.payload;
       if (state.offset === offset) {
         state.hasMoreSongs = (totalNumber - state.songs.length - songsToAdd.length) > 0
-        state.offset += 1
+        state.offset += 10
         state.songs = state.songs.concat(songsToAdd)
         state.totalNumber = totalNumber
       }

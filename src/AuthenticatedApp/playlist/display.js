@@ -80,6 +80,7 @@ const PlaylistDisplay = () => {
           ? (playlist.images.length === 1 ? playlist.images[0].url : playlist.images.at(-2).url)
           : ""
         }
+        play={() => playSongFromPlaylist(playlist.uri)(0)}
       />
       <PlaylistTable
         hasMoreSongs={playlist.hasMoreSongs}

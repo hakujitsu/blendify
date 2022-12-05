@@ -6,7 +6,7 @@ import SongHeader from './songHeader';
 const sx = {
   table: {
     maxWidth: BODY_WIDTH,
-    "margin-bottom": "32px"
+    marginBottom: 4,
   },
   spacerRow: {
     height: "12px"
@@ -20,7 +20,7 @@ const PlaylistTable = (props) => {
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Box style={sx.table}>
+    <Box sx={sx.table}>
       <SongHeader showAlbum={!lessThanMd} showDate={!lessThanLg} />
       <Box sx={sx.spacerRow} />
       <VirtualWindow visibleChildren={visibleChildren} numberOfItems={totalNumber} />

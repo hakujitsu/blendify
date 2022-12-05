@@ -16,7 +16,7 @@ export const BODY_WIDTH = `calc(max(100vw, ${MIN_WIDTH}) - ${DRAWER_WIDTH} - ${B
 
 /** PLAYLIST BODY CONSTANTS **/
 
-export const PLAYLIST_TITLE_HEIGHT = "168px"
+export const PLAYLIST_TITLE_HEIGHT = "228px"
 
 export const PLAYLIST_TABLE_HEIGHT = `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - ${PLAYLIST_TITLE_HEIGHT})`
 
