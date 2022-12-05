@@ -6,6 +6,7 @@ import SongHeader from './songHeader';
 const sx = {
   table: {
     maxWidth: BODY_WIDTH,
+    "margin-bottom": "32px"
   },
   spacerRow: {
     height: "12px"

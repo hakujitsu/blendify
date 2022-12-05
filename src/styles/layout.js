@@ -6,7 +6,7 @@ export const HEADER_HEIGHT = "64px"
 
 export const DRAWER_WIDTH = "240px";
 
-export const FOOTER_HEIGHT = "96px"
+export const FOOTER_HEIGHT = " 96px"
 
 export const BODY_MARGIN = "64px"
 
