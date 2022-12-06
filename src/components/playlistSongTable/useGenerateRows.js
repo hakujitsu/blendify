@@ -10,7 +10,7 @@ const useGenerateRows = (props) => {
   //   ))
   // }
   return songs.map((song, index) => {
-    if (songs.length >= 50 && index === songs.length - 25) {
+    if (songs.length > 500 && index === songs.length - 200) {
       return (
         <SongRow
           index={index}

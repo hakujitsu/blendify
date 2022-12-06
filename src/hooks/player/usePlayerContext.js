@@ -45,7 +45,6 @@ export const usePlayerContextProvider = () => {
     if (spotifyPlayer) {
       spotifyPlayer.removeListener('player_state_changed');
       spotifyPlayer.addListener('player_state_changed', (state => {
-        console.log(state)
         updatePlayerState(state)
       }));
     }

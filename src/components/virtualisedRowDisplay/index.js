@@ -5,7 +5,7 @@ const VirtualWindow = (props) => {
     <div
       style={{
         position: "relative",
-        height: (numberOfItems * 64) + 'px'
+        height: (Math.max(numberOfItems, visibleChildren.length) * 64) + 'px'
       }}
     >
       {visibleChildren}

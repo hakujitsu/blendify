@@ -25,9 +25,6 @@ const darkTheme = createTheme({
     secondary: {
       main: "#19c0e7",
     },
-    // text: {
-    //   primary: "#f2efed"
-    // }
   },
   components: {
     MuiPaper: {

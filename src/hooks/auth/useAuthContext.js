@@ -4,7 +4,7 @@ export const AuthContext = createContext(null);
 
 export const useAuthContextProvider = () => {
   const [userDetails, setUserDetails] = useState(null);
-  const [accessToken, setAccessToken] = useState(null)
+  const [accessToken, setAccessToken] = useState(null);
 
   const isLoggedIn = () => {
     return userDetails !== null;
@@ -16,8 +16,8 @@ export const useAuthContextProvider = () => {
   }
 
   const logOutCurrentUser = () => {
-    setUserDetails(null)
     setAccessToken(null)
+    setUserDetails(null)
   }
 
   const updateAccessToken = (newToken) => {
