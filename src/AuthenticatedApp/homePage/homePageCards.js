@@ -17,10 +17,10 @@ const sx = {
 }
 
 const HomePageCards = (props) => {
-  const { icon, text } = props
+  const { icon, text, onClick } = props
   return (
     <Card sx={sx.card}>
-      <CardActionArea sx={sx.fullSize}>
+      <CardActionArea onClick={onClick} sx={sx.fullSize}>
         <Stack
           direction="row"
           justifyContent="flex-start"
