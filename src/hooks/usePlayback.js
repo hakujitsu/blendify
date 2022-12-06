@@ -52,7 +52,7 @@ const usePlayback = () => {
     }
   }
 
-  const playSongFromPlaylist = (context_uri) => (song, index) => {
+  const playSongFromPlaylist = (context_uri) => (index) => {
     playSpotifyCollection(context_uri, index, CONTEXT_TYPE.spotifyPlaylist)
   }
 
