@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./useAuthContext";
 
 const PREFIX = "BLENDIFY/";
@@ -6,6 +7,7 @@ const REFRESH_TOKEN = `${PREFIX}REFRESH_TOKEN`;
 
 const useAuth = () => {
   const { logOutCurrentUser, setUserDetailsAndAccessToken } = useAuthContext();
+  const navigate = useNavigate()
 
   const authenticateWithCode = async (code) => {
     const res = await fetch(`/api/auth/callback/?code=${code}`, {
@@ -44,12 +46,15 @@ const useAuth = () => {
         img: image,
         uri: uri,
       }, access_token);
+    } else {
+      return null
     }
   };
 
   const logOut = () => {
     localStorage.removeItem(REFRESH_TOKEN)
     logOutCurrentUser()
+    navigate("/")
   }
 
   const saveRefreshToken = (token) => {
