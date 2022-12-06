@@ -22,6 +22,9 @@ export const convertMsToSongDuration = (ms) => {
 
 export const getDateAddedString = (dateString) => {
   const dateAdded = new Date(dateString)
+  if (dateAdded.valueOf() === 0) {
+    return ""
+  }
   const currentDate = new Date();
   const oneMonthAgo = subMonths(currentDate, 1)
 

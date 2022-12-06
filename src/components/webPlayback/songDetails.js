@@ -62,7 +62,7 @@ const SongDetails = () => {
         <Typography variant="body2" noWrap>{currentSong.track.name}</Typography>
         <Typography variant="caption" noWrap>{currentSong.track.artists.map(a => a.name).join(", ")}</Typography>
       </Stack>
-      {currentSong.track.liked ? <FavoriteIcon fontSize="small" /> : <FavoriteBorderIcon fontSize="small" />}
+      {/* {currentSong.track.liked ? <FavoriteIcon fontSize="small" /> : <FavoriteBorderIcon fontSize="small" />} */}
     </Stack>
   )
 }

@@ -1,48 +1,48 @@
 import { useTheme } from "@emotion/react";
-import { Stack, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import { Stack } from "@mui/system";
 import { useEffect, useRef, useState } from "react";
-import PlaylistTable from "../../components/playlistSongTable";
-import useVirtualRowDisplay from "../../components/virtualisedRowDisplay/useVirtualRowDisplay";
-import SongRowSkeleton from "../../components/playlistSongTable/songRowSkeleton";
-import useLikedSongs from "../../hooks/data/useLikedSongs";
-import { BODY_HEIGHT, BODY_WIDTH } from "../../styles/layout";
+import { useParams } from "react-router-dom";
 import PlaylistLabel from "../../components/playlistLabel";
+import PlaylistTable from "../../components/playlistSongTable";
+import SongRowSkeleton from "../../components/playlistSongTable/songRowSkeleton";
 import useGenerateRows from "../../components/playlistSongTable/useGenerateRows";
+import useVirtualRowDisplay from "../../components/virtualisedRowDisplay/useVirtualRowDisplay";
+import usePlaylist from "../../hooks/data/usePlaylist";
 import usePlayback from "../../hooks/usePlayback";
+import { BODY_HEIGHT, BODY_WIDTH } from "../../styles/layout";
 
 const sx = {
   stack: {
-    maxHeight: BODY_HEIGHT,
+    height: BODY_HEIGHT,
     maxWidth: BODY_WIDTH,
     overflowY: "auto",
-    pb: 4
   }
 }
 
-// TODO: add observer for skeleton elements
-
-const LikedSongsPage = () => {
-  const { hasMoreSongs, likedSongs, getLikedSongs, totalNumber } = useLikedSongs()
-  const { playSongFromLikedSongs } = usePlayback();
+const PlaylistDisplay = () => {
+  let { playlistId } = useParams();
+  const { playlist, fetchPlaylistTracks } = usePlaylist(playlistId);
+  const { playSongFromPlaylist } = usePlayback();
   const theme = useTheme();
   const lessThanLg = useMediaQuery(theme.breakpoints.down('lg'));
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'));
 
   const [observedElement, setObservedElement] = useState(null)
 
-  const observer = useRef(new IntersectionObserver(getLikedSongs));
+  const observer = useRef(new IntersectionObserver(fetchPlaylistTracks));
 
   useEffect(() => {
     if (!(observedElement && observer)) {
       return
     }
 
-    observer.current = new IntersectionObserver(getLikedSongs)
+    observer.current = new IntersectionObserver(fetchPlaylistTracks)
 
     const currentObserver = observer.current;
     const rowToObserve = observedElement
 
-    if (hasMoreSongs) {
+    if (playlist.hasMoreSongs) {
       currentObserver.observe(rowToObserve);
     } else {
       currentObserver.unobserve(rowToObserve)
@@ -52,20 +52,17 @@ const LikedSongsPage = () => {
         currentObserver.unobserve(observedElement);
       }
     };
-  }, [getLikedSongs, observedElement])
+  }, [fetchPlaylistTracks, observedElement])
 
   const { onScroll, visibleChildren } = useVirtualRowDisplay({
     children: useGenerateRows({
-      songs: likedSongs, showAlbum: !lessThanMd, showDate: !lessThanLg,
-      setObservedElement, hasMoreSongs, totalNumber, playSong: playSongFromLikedSongs(likedSongs)
+      songs: playlist.tracks, showAlbum: !lessThanMd, showDate: !lessThanLg,
+      setObservedElement, hasMoreSongs: playlist.hasMoreSongs, totalNumber: playlist.totalSongs,
+      playSong: playSongFromPlaylist(playlist.uri),
     }),
     rowHeight: 64,
     skeletonRow: <SongRowSkeleton showAlbum={!lessThanMd} showDate={!lessThanLg} />,
   })
-
-  useEffect(() => {
-    getLikedSongs()
-  }, [])
 
   return (
     <Stack
@@ -77,20 +74,23 @@ const LikedSongsPage = () => {
       onScroll={onScroll}
     >
       <PlaylistLabel
-        title="Liked Songs"
-        numOfSongs={totalNumber}
-        likedSongs={true}
-        play={() => playSongFromLikedSongs(likedSongs)(0)}
+        title={playlist.title}
+        numOfSongs={playlist.totalSongs}
+        img={playlist.images.length > 0
+          ? (playlist.images.length === 1 ? playlist.images[0].url : playlist.images.at(-2).url)
+          : ""
+        }
+        play={() => playSongFromPlaylist(playlist.uri)(0)}
       />
       <PlaylistTable
-        hasMoreSongs={hasMoreSongs}
-        songs={likedSongs}
-        getSongs={getLikedSongs}
-        totalNumber={totalNumber}
+        hasMoreSongs={playlist.hasMoreSongs}
+        songs={playlist.tracks}
+        getSongs={fetchPlaylistTracks}
+        totalNumber={playlist.totalSongs}
         visibleChildren={visibleChildren}
       />
     </Stack>
   )
 }
 
-export default LikedSongsPage;
+export default PlaylistDisplay;

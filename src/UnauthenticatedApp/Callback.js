@@ -16,6 +16,9 @@ const Callback = () => {
   };
 
   useEffect(() => {
+    if (!window.location.search ) {
+      navigate("/")
+    }
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
     const error = searchParams.get("error");
@@ -27,7 +30,6 @@ const Callback = () => {
   }, []);
 
   useEffect(() => {
-    console.log(userDetails)
     if (userDetails) {
       navigate("/");
     }

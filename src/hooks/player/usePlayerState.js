@@ -12,7 +12,7 @@ const usePlayerState = () => {
   const dispatch = useDispatch()
 
   const updatePlayerState = async (playerState) => {
-    if (playerState.track_window && playerState.track_window.current_track) {
+    if (playerState && playerState.track_window && playerState.track_window.current_track) {
       const currentUri = playerState.track_window.current_track.uri
       const progress = playerState.position
       const isPlaying = !playerState.paused

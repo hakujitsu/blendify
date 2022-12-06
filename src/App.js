@@ -25,7 +25,7 @@ import HomePage from "./AuthenticatedApp/homePage";
 const unauthenticatedRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
-      <Route path="/" element={<LandingPage />} />
+      <Route path="/" element={<LandingPage />} index/>
       <Route path="/callback" element={<Callback />} />
       <Route path="/*" element={<LandingPage />} />
     </Route>
@@ -50,11 +50,11 @@ function App() {
 
   return (
     <>
-      {isLoggedIn() ? (
+      {isLoggedIn() ?
         <RouterProvider router={playerRouter} />
-      ) : (
+        :
         <RouterProvider router={unauthenticatedRouter} />
-      )}
+      }
     </>
   );
 }
